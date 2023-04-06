@@ -4,6 +4,7 @@
 #include <Servo.h>
 #include <SPI.h>
 #include "credentials.h"
+#include "wifiConnection.h"
 
 using namespace std;
 
