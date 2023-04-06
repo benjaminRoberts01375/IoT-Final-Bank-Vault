@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <SPI.h>
+#include "credentials.h"
 
 using namespace std;
 
