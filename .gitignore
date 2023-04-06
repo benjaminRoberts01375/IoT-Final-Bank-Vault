@@ -1,2 +1,5 @@
+# Credentials
+Arduino Bank Vault/src/credentials.cpp
 
-Arduino Bank Vault/src/credentials.h
+# macOS indexing file
+.DS_Store
