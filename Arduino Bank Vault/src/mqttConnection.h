@@ -18,5 +18,5 @@ namespace mqttConnection
     /// @param payload Received data from MQTT
     /// @param length Length of the data received
     /// @return The interpreted message
-    String clientCallback(char *topic, uint8_t *payload, unsigned int length);
+    void clientCallback(char *topic, uint8_t *payload, unsigned int length);
 }
