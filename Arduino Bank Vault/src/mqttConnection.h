@@ -4,4 +4,5 @@
 
 namespace mqttConnection {
     
+    PubSubClient MQTTClient(wifiConnection::wifiClient);
 }
