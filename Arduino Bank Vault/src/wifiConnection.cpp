@@ -1,5 +1,7 @@
 #include "wifiConnection.h"
 
+WiFiClient wifiConnection::wifiClient;
+
 void wifiConnection::connectWiFi()
 {
     while (WiFi.status() != WL_CONNECTED)
