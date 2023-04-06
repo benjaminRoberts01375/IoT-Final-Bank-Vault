@@ -18,3 +18,17 @@ void mqttConnection::reconnectMQTTClient() {
     }
   }
 }
+
+String mqttConnection::clientCallback(char *topic, uint8_t *payload, unsigned int length) {
+    char buff[length + 1];
+    for (int i = 0; i < length; i++)
+    {
+        buff[i] = (char)payload[i];
+    }
+    buff[length] = '\0';
+
+    Serial.print("Message received - ");
+    Serial.println(buff);
+    String message = buff;
+    return message;
+}
