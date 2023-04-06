@@ -10,6 +10,9 @@ namespace mqttConnection
     /// @param WiFiClient Wifi to use to connect to MQTT broker
     PubSubClient MQTTClient(wifiConnection::wifiClient);
     
+    /// @brief Sets the MQTTClient to use the server and port
+    void configureMQTTClient();
+
     /// @brief Connect to MQTT client if not already connected (ex. startup or random disconnect)
     void reconnectMQTTClient();
 
