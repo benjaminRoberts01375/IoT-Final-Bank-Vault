@@ -1,7 +1,13 @@
 #include "main.h"
 
+int loops = 1;
+
 void setup() {
   Serial.begin(9600);
+  while (!Serial);                  // Wait for Serial to be ready
+  wifiConnection::connectWiFi();
+  mqttConnection::configureMQTTClient();
+  
   pinMode(LED_R_PIN, OUTPUT);       // Red LED pin
   pinMode(LED_G_PIN, OUTPUT);       // Green LED pin
   pinMode(LED_B_PIN, OUTPUT);       // Blue LED pin
@@ -24,4 +30,11 @@ void loop() {
       doorServo.write(0);
   }
   delay(100);
+
+  if (millis() / (5000 * loops) >= 1.0) {
+    loops += 1;
+    mqttConnection::reconnectMQTTClient();
+    Serial.println("Sending...");
+    mqttConnection::MQTTClient.publish(TOPIC.c_str(), "Test");
+  }
 }
