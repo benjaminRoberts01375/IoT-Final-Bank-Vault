@@ -14,26 +14,24 @@ void setup() {
   doorServo.attach(SERVO_PIN);            // Servo pin
   pinMode(DOOR_PIN, INPUT_PULLUP);        // Button pin
   
-  digitalWrite(LED_B_PIN, HIGH);    // Set LED to blue
-  doorServo.write(0);               // Move servo to starting position
+  digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
+  doorServo.write(0);                     // Move servo to starting position
 }
 
 void loop() {
   byte buttonState = digitalRead(DOOR_PIN);
-  
+  mqttConnection::reconnectMQTTClient();
+  mqttConnection::MQTTClient.loop();
+
   if (buttonState == LOW) {
-      Serial.println("Button is pressed");
       doorServo.write(180);
   }
   else {
-      Serial.println("Button is not pressed");
       doorServo.write(0);
   }
-  delay(100);
 
   if (millis() / (5000 * loops) >= 1.0) {
     loops += 1;
-    mqttConnection::reconnectMQTTClient();
     Serial.println("Sending...");
     mqttConnection::MQTTClient.publish(TOPIC.c_str(), "Test");
   }
