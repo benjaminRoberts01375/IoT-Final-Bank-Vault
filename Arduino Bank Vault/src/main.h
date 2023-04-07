@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <SPI.h>
+#include <Crypto.h>
 #include "credentials.h"
 #include "wifiConnection.h"
 #include "mqttConnection.h"
