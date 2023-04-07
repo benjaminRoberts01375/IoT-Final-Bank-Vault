@@ -8,7 +8,7 @@ namespace mqttConnection
 {
     /// @brief Setup an MQTT instance
     /// @param WiFiClient Wifi to use to connect to MQTT broker
-    PubSubClient MQTTClient(wifiConnection::wifiClient);
+    extern PubSubClient MQTTClient;
     
     /// @brief Sets the MQTTClient to use the server and port
     void configureMQTTClient();

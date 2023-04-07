@@ -1,5 +1,7 @@
 #include "mqttConnection.h"
 
+PubSubClient mqttConnection::MQTTClient = PubSubClient(wifiConnection::wifiClient);
+
 void mqttConnection::configureMQTTClient()
 {
     mqttConnection::MQTTClient.setServer(BROKER.c_str(), PORT_CONNECTION);
