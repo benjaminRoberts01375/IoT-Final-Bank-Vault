@@ -3,3 +3,7 @@ Arduino Bank Vault/src/credentials.cpp
 
 # macOS indexing file
 .DS_Store
+*.xcuserstate
+*.xcworkspacedata
+Bank Vault/Bank Vault.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+Bank Vault/Bank Vault.xcodeproj/xcuserdata/benroberts.xcuserdatad/xcschemes/xcschememanagement.plist
