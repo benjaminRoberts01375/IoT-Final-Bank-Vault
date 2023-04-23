@@ -20,11 +20,28 @@ struct ContentView: View {
             .edgesIgnoringSafeArea([.bottom, .horizontal])
             .navigationTitle("Your Vaults")
             .toolbar {
-                Button(action: {
-                    print("Toggle edit mode")
-                }, label: {
-                    Text("Edit")
-                })
+                if controller.editMode {
+                    Button(action: {
+                        print("Add a vault")
+                    }, label: {
+                        Text("Add")
+                    })
+                    Button(action: {
+                        withAnimation {
+                            controller.editMode.toggle()
+                        }
+                    }, label: {
+                        Text("Done")
+                    })
+                    .disabled(UserLoginM.shared.vaults.isEmpty)
+                }
+                else {
+                    Button(action: {
+                        print("Toggle edit mode")
+                    }, label: {
+                        Text("Edit")
+                    })
+                }
             }
         }
     }
