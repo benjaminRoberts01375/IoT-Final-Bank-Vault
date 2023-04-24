@@ -13,7 +13,7 @@
 		07A5D12229F5C362006EA009 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A5D12129F5C362006EA009 /* Preview Assets.xcassets */; };
 		07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12829F5C39A006EA009 /* ContentViewModel.swift */; };
 		07A5D12B29F5C696006EA009 /* VaultM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12A29F5C696006EA009 /* VaultM.swift */; };
-		07A5D12D29F5CFB1006EA009 /* UserLoginM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12C29F5CFB1006EA009 /* UserLoginM.swift */; };
+		07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12C29F5CFB1006EA009 /* UserM.swift */; };
 		07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1629F642C800458BB0 /* UserLoginV.swift */; };
 		07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1929F647CE00458BB0 /* UserLoginVM.swift */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 		07A5D12129F5C362006EA009 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07A5D12829F5C39A006EA009 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		07A5D12A29F5C696006EA009 /* VaultM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultM.swift; sourceTree = "<group>"; };
-		07A5D12C29F5CFB1006EA009 /* UserLoginM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginM.swift; sourceTree = "<group>"; };
+		07A5D12C29F5CFB1006EA009 /* UserM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserM.swift; sourceTree = "<group>"; };
 		07B73D1629F642C800458BB0 /* UserLoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginV.swift; sourceTree = "<group>"; };
 		07B73D1829F643C100458BB0 /* Bank Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bank Vault.entitlements"; sourceTree = "<group>"; };
 		07B73D1929F647CE00458BB0 /* UserLoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginVM.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		07A5D13029F5D03E006EA009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				07A5D12C29F5CFB1006EA009 /* UserLoginM.swift */,
+				07A5D12C29F5CFB1006EA009 /* UserM.swift */,
 				07A5D12A29F5C696006EA009 /* VaultM.swift */,
 			);
 			path = Models;
@@ -184,7 +184,7 @@
 				07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */,
 				07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */,
 				07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */,
-				07A5D12D29F5CFB1006EA009 /* UserLoginM.swift in Sources */,
+				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

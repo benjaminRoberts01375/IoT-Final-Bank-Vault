@@ -2,9 +2,9 @@
 
 import SwiftUI
 
-final class UserLoginM: ObservableObject {
+final class UserM: ObservableObject {
     // Setup singleton
-    public static var shared: UserLoginM = UserLoginM()
+    public static var shared: UserM = UserM()
     private init() {
         self.vaults = []
     }

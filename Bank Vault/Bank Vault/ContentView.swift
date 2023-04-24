@@ -8,7 +8,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(Array(UserLoginM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
+                ForEach(Array(UserM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
                     Button(action: {
                         
                     }, label: {
@@ -33,7 +33,7 @@ struct ContentView: View {
                     }, label: {
                         Text("Done")
                     })
-                    .disabled(UserLoginM.shared.vaults.isEmpty)
+                    .disabled(UserM.shared.vaults.isEmpty)
                 }
                 else {
                     Button(action: {                                // Edit mode button

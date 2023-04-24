@@ -9,7 +9,7 @@ final class UserLoginVM {
         case .success(let auth):
             print("Successful login")
             guard let credential = auth.credential as? ASAuthorizationAppleIDCredential else { return }
-            UserLoginM.shared.userID = credential.user
+            UserM.shared.userID = credential.user
             dismiss()
             
         case .failure(let error):
