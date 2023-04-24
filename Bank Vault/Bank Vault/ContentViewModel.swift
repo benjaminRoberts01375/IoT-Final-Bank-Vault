@@ -12,4 +12,12 @@ final class ContentViewModel: ObservableObject {
         self.editMode = UserLoginM.shared.vaults.isEmpty
         self.showLoginPage = true
     }
+    
+    /// Checks the user's ID to see if the login page should be dismissed
+    internal func determineLoginStatus(newId: String?) {
+        print("User id: \(UserLoginM.shared.userID ?? "")")
+        if newId != nil {
+            showLoginPage = false
+        }
+    }
 }
