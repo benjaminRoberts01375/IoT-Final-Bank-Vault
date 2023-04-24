@@ -21,12 +21,12 @@ struct ContentView: View {
             .navigationTitle("Your Vaults")
             .toolbar {
                 if controller.editMode {
-                    Button(action: {
+                    Button(action: {                                // Add vault button
                         print("Add a vault")
                     }, label: {
                         Text("Add")
                     })
-                    Button(action: {
+                    Button(action: {                                // Finish editing button
                         withAnimation {
                             controller.editMode.toggle()
                         }
@@ -36,12 +36,15 @@ struct ContentView: View {
                     .disabled(UserLoginM.shared.vaults.isEmpty)
                 }
                 else {
-                    Button(action: {
-                        print("Toggle edit mode")
+                    Button(action: {                                // Edit mode button
+                        controller.editMode.toggle()
                     }, label: {
                         Text("Edit")
                     })
                 }
+            }
+            .fullScreenCover(isPresented: $controller.showLoginPage) {
+                UserLoginV()
             }
         }
     }
