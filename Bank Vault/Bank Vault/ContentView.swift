@@ -3,9 +3,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var controller: ContentViewModel = ContentViewModel()
+    
     var body: some View {
-        @StateObject var controller: ContentViewModel = ContentViewModel()
-        
         NavigationStack {
             List {
                 ForEach(Array(UserLoginM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
