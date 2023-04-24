@@ -5,13 +5,14 @@ import SwiftUI
 
 struct UserLoginV: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var dismiss
     let controller: UserLoginVM = UserLoginVM()
     
     var body: some View {
         SignInWithAppleButton(
             .signIn,
             onRequest: { $0.requestedScopes = [] },
-            onCompletion: { controller.login(result: $0) }
+            onCompletion: { controller.login(result: $0, dismiss: dismiss) }
         )
         .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
         .frame(width: 250, height: 60)
