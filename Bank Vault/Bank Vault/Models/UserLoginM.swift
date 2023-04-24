@@ -10,4 +10,5 @@ final class UserLoginM: ObservableObject {
     }
     
     @Published var vaults: [VaultM]
+    @Published var userID: String?
 }

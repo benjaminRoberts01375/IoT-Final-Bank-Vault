@@ -14,6 +14,8 @@
 		07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12829F5C39A006EA009 /* ContentViewModel.swift */; };
 		07A5D12B29F5C696006EA009 /* VaultM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12A29F5C696006EA009 /* VaultM.swift */; };
 		07A5D12D29F5CFB1006EA009 /* UserLoginM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12C29F5CFB1006EA009 /* UserLoginM.swift */; };
+		07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1629F642C800458BB0 /* UserLoginV.swift */; };
+		07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1929F647CE00458BB0 /* UserLoginVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,9 @@
 		07A5D12829F5C39A006EA009 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		07A5D12A29F5C696006EA009 /* VaultM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultM.swift; sourceTree = "<group>"; };
 		07A5D12C29F5CFB1006EA009 /* UserLoginM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginM.swift; sourceTree = "<group>"; };
+		07B73D1629F642C800458BB0 /* UserLoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginV.swift; sourceTree = "<group>"; };
 		07B73D1829F643C100458BB0 /* Bank Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bank Vault.entitlements"; sourceTree = "<group>"; };
+		07B73D1929F647CE00458BB0 /* UserLoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +64,9 @@
 			children = (
 				07B73D1829F643C100458BB0 /* Bank Vault.entitlements */,
 				07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */,
-				07A5D12E29F5D014006EA009 /* Views and Logic */,
 				07A5D11C29F5C360006EA009 /* ContentView.swift */,
 				07A5D12829F5C39A006EA009 /* ContentViewModel.swift */,
+				07A5D12E29F5D014006EA009 /* Views and Logic */,
 				07A5D13029F5D03E006EA009 /* Models */,
 				07A5D11E29F5C362006EA009 /* Assets.xcassets */,
 				07A5D12029F5C362006EA009 /* Preview Content */,
@@ -81,6 +85,7 @@
 		07A5D12E29F5D014006EA009 /* Views and Logic */ = {
 			isa = PBXGroup;
 			children = (
+				07B73D1529F642B800458BB0 /* User Login */,
 			);
 			path = "Views and Logic";
 			sourceTree = "<group>";
@@ -92,6 +97,15 @@
 				07A5D12A29F5C696006EA009 /* VaultM.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		07B73D1529F642B800458BB0 /* User Login */ = {
+			isa = PBXGroup;
+			children = (
+				07B73D1629F642C800458BB0 /* UserLoginV.swift */,
+				07B73D1929F647CE00458BB0 /* UserLoginVM.swift */,
+			);
+			path = "User Login";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,8 +179,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A5D12B29F5C696006EA009 /* VaultM.swift in Sources */,
+				07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */,
 				07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */,
 				07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */,
+				07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */,
 				07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserLoginM.swift in Sources */,
 			);
@@ -279,6 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
