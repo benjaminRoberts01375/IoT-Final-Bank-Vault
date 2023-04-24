@@ -14,6 +14,8 @@ struct UserLoginV: View {
             onCompletion: { controller.login(result: $0) }
         )
         .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+        .frame(width: 250, height: 60)
+        .cornerRadius(200)
     }
 }
 
