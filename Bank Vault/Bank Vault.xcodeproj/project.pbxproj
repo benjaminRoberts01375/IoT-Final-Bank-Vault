@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		070C83FE29F773BF003B0D45 /* AddVaultV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C83FD29F773BF003B0D45 /* AddVaultV.swift */; };
 		070C840029F774A5003B0D45 /* AddVaultVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C83FF29F774A5003B0D45 /* AddVaultVM.swift */; };
+		070C840229F78B04003B0D45 /* MQTTManagerM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840129F78B04003B0D45 /* MQTTManagerM.swift */; };
 		07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */; };
 		07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11C29F5C360006EA009 /* ContentView.swift */; };
 		07A5D11F29F5C362006EA009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A5D11E29F5C362006EA009 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		070C83FD29F773BF003B0D45 /* AddVaultV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVaultV.swift; sourceTree = "<group>"; };
 		070C83FF29F774A5003B0D45 /* AddVaultVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVaultVM.swift; sourceTree = "<group>"; };
+		070C840129F78B04003B0D45 /* MQTTManagerM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManagerM.swift; sourceTree = "<group>"; };
 		07A5D11729F5C360006EA009 /* Bank Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank Vault.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_VaultApp.swift; sourceTree = "<group>"; };
 		07A5D11C29F5C360006EA009 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				07A5D12C29F5CFB1006EA009 /* UserM.swift */,
 				07A5D12A29F5C696006EA009 /* VaultM.swift */,
+				070C840129F78B04003B0D45 /* MQTTManagerM.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				070C83FE29F773BF003B0D45 /* AddVaultV.swift in Sources */,
 				07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
+				070C840229F78B04003B0D45 /* MQTTManagerM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
