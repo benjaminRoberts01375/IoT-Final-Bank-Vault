@@ -7,25 +7,38 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(Array(UserM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
-                    Button(action: {
-                        
-                    }, label: {
-                        Text(vault.name)
-                    })
-                    .transition(.opacity)
+            if UserM.shared.vaults.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("NO AVAILABLE VAULTS")
+                        .font(.callout)
+                        .fontWeight(.bold)
+                        .foregroundColor(.secondary)
                 }
             }
+            else {
+                List {
+                    ForEach(Array(UserM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
+                        Button(action: {
+                            
+                        }, label: {
+                            Text(vault.name)
+                        })
+                        .transition(.opacity)
+                    }
+                }
+            }
+            Color.clear
             .edgesIgnoringSafeArea([.bottom, .horizontal])
             .navigationTitle("Your Vaults")
             .toolbar {
                 if controller.editMode {
-                    Button(action: {                                // Add vault button
-                        print("Add a vault")
-                    }, label: {
-                        Text("Add")
-                    })
+                    NavigationLink(                                 // Add vault button
+                        destination: AddVaultV(),
+                        label: {
+                            Text("Add")
+                        }
+                    )
                     Button(action: {                                // Finish editing button
                         withAnimation {
                             controller.editMode.toggle()
@@ -43,9 +56,9 @@ struct ContentView: View {
                     })
                 }
             }
-            .fullScreenCover(isPresented: $controller.showLoginPage) {
-                UserLoginV()
-            }
+//            .fullScreenCover(isPresented: $controller.showLoginPage) {
+//                UserLoginV()
+//            }
         }
     }
 }
