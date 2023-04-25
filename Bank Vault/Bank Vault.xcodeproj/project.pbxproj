@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070C83FE29F773BF003B0D45 /* AddVaultV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C83FD29F773BF003B0D45 /* AddVaultV.swift */; };
+		070C840029F774A5003B0D45 /* AddVaultVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C83FF29F774A5003B0D45 /* AddVaultVM.swift */; };
 		07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */; };
 		07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11C29F5C360006EA009 /* ContentView.swift */; };
 		07A5D11F29F5C362006EA009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A5D11E29F5C362006EA009 /* Assets.xcassets */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		070C83FD29F773BF003B0D45 /* AddVaultV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVaultV.swift; sourceTree = "<group>"; };
+		070C83FF29F774A5003B0D45 /* AddVaultVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVaultVM.swift; sourceTree = "<group>"; };
 		07A5D11729F5C360006EA009 /* Bank Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank Vault.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_VaultApp.swift; sourceTree = "<group>"; };
 		07A5D11C29F5C360006EA009 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070C83FC29F773A2003B0D45 /* Add Vault */ = {
+			isa = PBXGroup;
+			children = (
+				070C83FD29F773BF003B0D45 /* AddVaultV.swift */,
+				070C83FF29F774A5003B0D45 /* AddVaultVM.swift */,
+			);
+			path = "Add Vault";
+			sourceTree = "<group>";
+		};
 		07A5D10E29F5C360006EA009 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				07B73D1529F642B800458BB0 /* User Login */,
+				070C83FC29F773A2003B0D45 /* Add Vault */,
 			);
 			path = "Views and Logic";
 			sourceTree = "<group>";
@@ -185,7 +199,9 @@
 				07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */,
 				07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */,
 				07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */,
+				070C840029F774A5003B0D45 /* AddVaultVM.swift in Sources */,
 				07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */,
+				070C83FE29F773BF003B0D45 /* AddVaultV.swift in Sources */,
 				07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
 			);
