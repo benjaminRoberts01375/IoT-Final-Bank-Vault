@@ -1,6 +1,9 @@
 #include "main.h"
 
 int loops = 1;
+int vaultID = 0;
+string phoneIDs[100] = { };
+
 
 void setup() {
   Serial.begin(9600);
