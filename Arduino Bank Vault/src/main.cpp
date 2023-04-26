@@ -4,6 +4,41 @@ int loops = 1;
 int vaultID = 0;
 string phoneIDs[100] = { };
 
+void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
+  Serial.println("Got a response");
+  StaticJsonDocument<200> JSONResponse;
+  DeserializationError error = deserializeJson(JSONResponse, payload);
+
+  if (error) {
+    Serial.println("Not able to serialize the confirmation JSON.");
+    return;
+  }
+
+  if (JSONResponse.containsKey("phoneID") && JSONResponse.containsKey("requestType")) {       // If the request has a "request type" field
+    int phoneID = JSONResponse["phoneID"];
+    string requestType = JSONResponse["requestType"];
+    Serial.print("Request type is: ");
+    Serial.println(requestType.c_str());
+    if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vaultM")) {    // If a vault object exists
+      JsonObject nestedObj = JSONResponse["vaultM"].as<JsonObject>();
+      if (nestedObj.containsKey("vaultID") && nestedObj["vaultID"] == vaultID) {                  // If a vault ID is specified
+      }
+      else {
+        Serial.println("No ID specified, or ID was incorrect");
+      }
+    }
+    else if (requestType == mqttConnection::checkSetup) {
+    }
+    Serial.println("Unknown request");
+  }
+  else {
+    Serial.println("Invalid JSON response");
+  }
+}
+
+void setupVault() {
+  mqttConnection::MQTTClient.setCallback(confirmSetup);
+}
 
 void setup() {
   Serial.begin(9600);
