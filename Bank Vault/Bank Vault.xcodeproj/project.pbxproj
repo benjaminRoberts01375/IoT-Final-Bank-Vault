@@ -15,6 +15,8 @@
 		070C840A29F88EF9003B0D45 /* VaultManagerM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840929F88EF9003B0D45 /* VaultManagerM.swift */; };
 		070C840C29F8F866003B0D45 /* RequestToSetupVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840B29F8F866003B0D45 /* RequestToSetupVault.swift */; };
 		070C840F29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840E29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift */; };
+		070C841229F903C9003B0D45 /* ConfigureVaultVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C841129F903C9003B0D45 /* ConfigureVaultVM.swift */; };
+		070C841429F903E9003B0D45 /* ConfigureVaultV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C841329F903E9003B0D45 /* ConfigureVaultV.swift */; };
 		07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */; };
 		07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11C29F5C360006EA009 /* ContentView.swift */; };
 		07A5D11F29F5C362006EA009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A5D11E29F5C362006EA009 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		070C840929F88EF9003B0D45 /* VaultManagerM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultManagerM.swift; sourceTree = "<group>"; };
 		070C840B29F8F866003B0D45 /* RequestToSetupVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToSetupVault.swift; sourceTree = "<group>"; };
 		070C840E29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoNeedsSetup.swift; sourceTree = "<group>"; };
+		070C841129F903C9003B0D45 /* ConfigureVaultVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureVaultVM.swift; sourceTree = "<group>"; };
+		070C841329F903E9003B0D45 /* ConfigureVaultV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureVaultV.swift; sourceTree = "<group>"; };
 		07A5D11729F5C360006EA009 /* Bank Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank Vault.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_VaultApp.swift; sourceTree = "<group>"; };
 		07A5D11C29F5C360006EA009 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +89,15 @@
 			path = "From Ardunio Message Types";
 			sourceTree = "<group>";
 		};
+		070C841029F903B1003B0D45 /* Configure Vault */ = {
+			isa = PBXGroup;
+			children = (
+				070C841329F903E9003B0D45 /* ConfigureVaultV.swift */,
+				070C841129F903C9003B0D45 /* ConfigureVaultVM.swift */,
+			);
+			path = "Configure Vault";
+			sourceTree = "<group>";
+		};
 		07A5D10E29F5C360006EA009 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +142,7 @@
 			children = (
 				07B73D1529F642B800458BB0 /* User Login */,
 				070C83FC29F773A2003B0D45 /* Add Vault */,
+				070C841029F903B1003B0D45 /* Configure Vault */,
 			);
 			path = "Views and Logic";
 			sourceTree = "<group>";
@@ -236,6 +250,7 @@
 				07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */,
 				070C840A29F88EF9003B0D45 /* VaultManagerM.swift in Sources */,
 				07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */,
+				070C841429F903E9003B0D45 /* ConfigureVaultV.swift in Sources */,
 				070C840C29F8F866003B0D45 /* RequestToSetupVault.swift in Sources */,
 				07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */,
 				070C840F29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift in Sources */,
@@ -245,6 +260,7 @@
 				07A5D12929F5C39A006EA009 /* ContentViewModel.swift in Sources */,
 				070C840829F88A45003B0D45 /* CheckUnconfiguredVaults.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
+				070C841229F903C9003B0D45 /* ConfigureVaultVM.swift in Sources */,
 				070C840229F78B04003B0D45 /* MQTTManagerM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
