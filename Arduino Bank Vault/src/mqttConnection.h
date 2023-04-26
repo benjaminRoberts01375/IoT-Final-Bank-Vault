@@ -22,4 +22,7 @@ namespace mqttConnection
     /// @param length Length of the data received
     /// @return The interpreted message
     void clientCallback(char *topic, uint8_t *payload, unsigned int length);
+
+    const string requestSetup = "request setup";
+    const string checkSetup = "check setup";
 }
