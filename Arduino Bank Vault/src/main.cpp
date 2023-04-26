@@ -4,6 +4,40 @@ int loops = 1;
 int vaultID = 0;
 string phoneIDs[100] = { };
 
+void configureVault(char *topic, uint8_t *payload, unsigned int length) {
+  Serial.println("Response for configuring vault");
+  StaticJsonDocument<200> JSONResponse;
+  DeserializationError error = deserializeJson(JSONResponse, payload);
+
+  if (error) {
+    Serial.println("Not able to serialize the confirmation JSON.");
+    return;
+  }
+
+  if (JSONResponse.containsKey("phoneID")) {
+    Serial.println("Valid JSON");
+    string phoneID = JSONResponse["phoneID"];
+    int index = 0;
+    for (int i = 0; i < sizeof(phoneIDs); i++) {
+      if (phoneIDs[index] == JSONResponse["phoneID"]) {  // Prevent duplicate entry
+        return;
+      }
+      else if (phoneIDs[index] != "") {           // Keep searching until an empty spot is found
+        index += 1;
+      }
+      else {                                      // We found a spot, stop looking
+        break;
+      }
+    }
+    phoneIDs[index] = phoneID;
+    Serial.println("Added phone id to list");
+    mqttConnection::MQTTClient.setCallback(mqttConnection::clientCallback);
+  }
+  else {
+    Serial.println("Invalid JSON response");
+  }
+}
+
 void enterSetup(int phoneID) {
   Serial.println("Entering setup.");                                      // Print status
   StaticJsonDocument<200> doc;                                            // Create a json doc
@@ -14,6 +48,7 @@ void enterSetup(int phoneID) {
   string jsonString;                                                      // Storage for JSON object as a string
   serializeJson(doc, jsonString);                                         // Serialize json to a string
   mqttConnection::MQTTClient.publish(TOPIC.c_str(), jsonString.c_str());  // Publish to the topic
+  mqttConnection::MQTTClient.setCallback(configureVault);                 // Set the callback to the next stage of setup
 }
 
 void displaySetupStatus(int phoneID) {
