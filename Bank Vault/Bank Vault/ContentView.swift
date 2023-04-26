@@ -22,7 +22,7 @@ struct ContentView: View {
                         Button(action: {
                             
                         }, label: {
-                            Text(vault.name)
+                            Text(vault.name ?? "")
                         })
                         .transition(.opacity)
                     }
