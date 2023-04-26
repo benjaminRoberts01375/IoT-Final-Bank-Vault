@@ -12,9 +12,7 @@ struct AddVaultV: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(controller.availableVaults.sorted(by: { (lhs, rhs) -> Bool in
-                    lhs.name < rhs.name
-                }), id: \.id) { vault in
+                ForEach(controller.availableVaults) { vault in
                     
                 }
             }
