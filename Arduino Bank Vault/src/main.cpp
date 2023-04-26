@@ -4,6 +4,18 @@ int loops = 1;
 int vaultID = 0;
 string phoneIDs[100] = { };
 
+void displaySetupStatus(int phoneID) {
+  Serial.println("Displaying setup status.");
+  StaticJsonDocument<200> doc;
+  JsonObject vaultInfo = doc.createNestedObject("vaultM");                // Create vault info 
+  vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
+  doc["phoneID"] = phoneID;
+  doc["setupResponse"] = "Needs setup";
+  string jsonString;
+  serializeJson(doc, jsonString);
+  mqttConnection::MQTTClient.publish(TOPIC.c_str(), jsonString.c_str());
+}
+
 void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
   Serial.println("Got a response");
   StaticJsonDocument<200> JSONResponse;
