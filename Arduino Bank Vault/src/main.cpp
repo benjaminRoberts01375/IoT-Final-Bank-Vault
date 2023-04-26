@@ -49,7 +49,7 @@ void enterSetup(int phoneID) {
   StaticJsonDocument<200> doc;                                            // Create a json doc
   doc["phoneID"] = phoneID;                                               // ID of the phone
   doc["confirmSetup"] = true;                                             // Inform the mobile device that setup is a go
-  JsonObject vaultInfo = doc.createNestedObject("vaultM");                // Create vault info 
+  JsonObject vaultInfo = doc.createNestedObject("vault");                 // Create vault info 
   vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
   string jsonString;                                                      // Storage for JSON object as a string
   serializeJson(doc, jsonString);                                         // Serialize json to a string
@@ -62,7 +62,7 @@ void enterSetup(int phoneID) {
 void displaySetupStatus(int phoneID) {
   Serial.println("Displaying setup status.");
   StaticJsonDocument<200> doc;                                            // JSON document
-  JsonObject vaultInfo = doc.createNestedObject("vaultM");                // Create vault info 
+  JsonObject vaultInfo = doc.createNestedObject("vault");                 // Create vault info 
   vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
   doc["phoneID"] = phoneID;                                               // Set the phone ID
   doc["setupResponse"] = "Needs setup";                                   // Set the response
@@ -90,8 +90,8 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
     string requestType = JSONResponse["requestType"];                                         // Save the request type
     Serial.print("Request type is: ");
     Serial.println(requestType.c_str());
-    if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vaultM")) {    // If a vault object exists
-      JsonObject nestedObj = JSONResponse["vaultM"].as<JsonObject>();                             // Save the vault object
+    if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vault")) {     // If a vault object exists
+      JsonObject nestedObj = JSONResponse["vault"].as<JsonObject>();                              // Save the vault object
       if (nestedObj.containsKey("vaultID") && nestedObj["vaultID"] == vaultID) {                  // If a vault ID is specified
         enterSetup(phoneID);                                                                        // Enter setup for this vault
       }
