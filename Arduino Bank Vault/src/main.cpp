@@ -40,6 +40,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
       }
     }
     else if (requestType == mqttConnection::checkSetup) {
+      displaySetupStatus(phoneID);
     }
     Serial.println("Unknown request");
   }
