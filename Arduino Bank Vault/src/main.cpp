@@ -113,7 +113,6 @@ void setup() {
   doorServo.attach(SERVO_PIN);            // Servo pin
   pinMode(DOOR_PIN, INPUT_PULLUP);        // Button pin
   
-  digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
   doorServo.write(0);                     // Move servo to starting position
   
   randomSeed(analogRead(0));              // Setup the random seed
@@ -121,6 +120,7 @@ void setup() {
   
   digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
   
+  setupVault();                           // Enter setup mode
 }
 
 void loop() {
@@ -135,9 +135,9 @@ void loop() {
       doorServo.write(0);
   }
 
-  if (millis() / (5000 * loops) >= 1.0) {
-    loops += 1;
-    Serial.println("Sending...");
-    mqttConnection::MQTTClient.publish(TOPIC.c_str(), "Test");
-  }
+  // if (millis() / (5000 * loops) >= 1.0) {
+  //   loops += 1;
+  //   Serial.println("Sending...");
+  //   mqttConnection::MQTTClient.publish(TOPIC.c_str(), "Test");
+  // }
 }
