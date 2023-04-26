@@ -17,7 +17,7 @@ void mqttConnection::reconnectMQTTClient()
         if (MQTTClient.connect("Vault"))
         {
             Serial.println("Connected to broker.");
-            MQTTClient.subscribe(TOPIC.c_str());
+            MQTTClient.subscribe(topic.c_str());
         }
         else
         {

@@ -53,7 +53,7 @@ void enterSetup(int phoneID) {
   vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
   string jsonString;                                                      // Storage for JSON object as a string
   serializeJson(doc, jsonString);                                         // Serialize json to a string
-  mqttConnection::MQTTClient.publish(TOPIC.c_str(), jsonString.c_str());  // Publish to the topic
+  mqttConnection::MQTTClient.publish(topic.c_str(), jsonString.c_str());  // Publish to the topic
   mqttConnection::MQTTClient.setCallback(configureVault);                 // Set the callback to the next stage of setup
 }
 
@@ -68,7 +68,7 @@ void displaySetupStatus(int phoneID) {
   doc["setupResponse"] = "Needs setup";                                   // Set the response
   string jsonString;
   serializeJson(doc, jsonString);                                         // Serialize JSON to a string
-  mqttConnection::MQTTClient.publish(TOPIC.c_str(), jsonString.c_str());  // Publish
+  mqttConnection::MQTTClient.publish(topic.c_str(), jsonString.c_str());  // Publish
 }
 
 /// @brief Handles checking if the device should be setup, or could be setup
