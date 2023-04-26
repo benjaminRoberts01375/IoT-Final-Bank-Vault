@@ -4,6 +4,18 @@ int loops = 1;
 int vaultID = 0;
 string phoneIDs[100] = { };
 
+void enterSetup(int phoneID) {
+  Serial.println("Entering setup.");                                      // Print status
+  StaticJsonDocument<200> doc;                                            // Create a json doc
+  doc["phoneID"] = phoneID;                                               // ID of the phone
+  doc["confirmSetup"] = true;                                             // Inform the mobile device that setup is a go
+  JsonObject vaultInfo = doc.createNestedObject("vaultM");                // Create vault info 
+  vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
+  string jsonString;                                                      // Storage for JSON object as a string
+  serializeJson(doc, jsonString);                                         // Serialize json to a string
+  mqttConnection::MQTTClient.publish(TOPIC.c_str(), jsonString.c_str());  // Publish to the topic
+}
+
 void displaySetupStatus(int phoneID) {
   Serial.println("Displaying setup status.");
   StaticJsonDocument<200> doc;
@@ -34,6 +46,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
     if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vaultM")) {    // If a vault object exists
       JsonObject nestedObj = JSONResponse["vaultM"].as<JsonObject>();
       if (nestedObj.containsKey("vaultID") && nestedObj["vaultID"] == vaultID) {                  // If a vault ID is specified
+        enterSetup(phoneID);
       }
       else {
         Serial.println("No ID specified, or ID was incorrect");
