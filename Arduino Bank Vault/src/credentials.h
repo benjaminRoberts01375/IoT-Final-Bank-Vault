@@ -10,4 +10,3 @@ extern const char* PASSWORD;
 extern const string TOPIC;
 extern const string BROKER;
 extern const int PORT_CONNECTION;
-extern const string CLIENT_NAME;
