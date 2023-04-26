@@ -37,6 +37,18 @@ final class MQTTManagerM {
         
         mqtt.connect()                                                                                          // Connect to configured MQTT broker
         
+        self.cancellablePublisher = mqtt.messagePublisher                                                       // Setup background updates for messages
+            .sink { message in
+                DispatchQueue.main.async {                                                                          // Run on main thread
+                    guard let rawData:Data = message.payload.string?.data(using: .utf8) else { return }                 // Convert message to data type
+                    print(String(decoding: rawData, as: UTF8.self))                                                     // Debug message
+                    if let decodedData = try? JSONDecoder().decode(ArdunioNeedsSetup.self, from: rawData) {             // Decode JSON into ArduinoSetupRequest struct
+                        if decodedData.setupResponse == "Needs setup" {
+                            VaultManagerM.shared.vaultsToConfigure.append(decodedData.vault)                                // Add the vault to the list of vaults in need of configuring
+                        }
+                    }
+                }
+            }
         
         return mqtt
     }
