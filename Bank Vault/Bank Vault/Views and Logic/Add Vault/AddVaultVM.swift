@@ -3,10 +3,10 @@
 import SwiftUI
 
 final class AddVaultVM: ObservableObject {
-    @Published var availableVaults: [VaultM]
+    @Published var vaultManager: VaultManagerM
     
     init() {
-        availableVaults = []
+        self.vaultManager = VaultManagerM.shared
     }
     
     internal func checkForVaults() {
