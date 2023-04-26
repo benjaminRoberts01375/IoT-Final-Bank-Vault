@@ -12,7 +12,7 @@ struct AddVaultV: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(controller.availableVaults) { vault in
+                ForEach(controller.vaultManager.vaultsToConfigure) { vault in
                     
                 }
             }
