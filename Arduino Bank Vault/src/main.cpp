@@ -92,7 +92,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
     Serial.println(requestType.c_str());
     if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vault")) {     // If a vault object exists
       JsonObject nestedObj = JSONResponse["vault"].as<JsonObject>();                              // Save the vault object
-      if (nestedObj.containsKey("vaultID") && nestedObj["vaultID"] == vaultID) {                  // If a vault ID is specified
+      if (nestedObj.containsKey("id") && nestedObj["id"] == vaultID) {                            // If a vault ID is specified
         enterSetup(phoneID);                                                                        // Enter setup for this vault
       }
       else {
