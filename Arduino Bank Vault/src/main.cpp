@@ -115,6 +115,12 @@ void setup() {
   
   digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
   doorServo.write(0);                     // Move servo to starting position
+  
+  randomSeed(analogRead(0));              // Setup the random seed
+  vaultID = random(50001);              // Choose a random number from 0 - 50,000
+  
+  digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
+  
 }
 
 void loop() {
