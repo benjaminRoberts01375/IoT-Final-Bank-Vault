@@ -10,3 +10,4 @@ extern const char* PASSWORD;
 extern string topic;
 extern const string BROKER;
 extern const int PORT_CONNECTION;
+extern int vaultID;

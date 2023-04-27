@@ -1,7 +1,6 @@
 #include "main.h"
 
 int loops = 1;
-int vaultID = 0;
 string phoneIDs[100] = { };
 
 /// @brief Sets up vault based on phone request
