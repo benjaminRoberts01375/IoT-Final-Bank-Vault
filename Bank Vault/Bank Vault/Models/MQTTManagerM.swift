@@ -90,16 +90,18 @@ final class MQTTManagerM: ObservableObject {
     }
     
     public func connectToSetup() {
-        connect()
         self.mqtt?.subscribe(to: setupTopic, qos: .exactlyOnce)
     }
     
     private func sendData(data: Encodable, topic: String) {
+        print("Sending data")
         guard let json = try? JSONEncoder().encode(data) else { return }
-        self.mqtt?.publish(String(decoding: json, as: UTF8.self), to: topic, qos: .atLeastOnce)
+        guard let mqtt = self.mqtt else { return }
+        mqtt.publish(String(decoding: json, as: UTF8.self), to: topic, qos: .atLeastOnce)
     }
     
     public func checkVaultsToSetup() {
+        connectToSetup()
         sendData(data: CheckUnconfiguredVaults(), topic: setupTopic)
     }
 }

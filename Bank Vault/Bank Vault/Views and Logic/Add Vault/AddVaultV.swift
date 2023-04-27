@@ -22,9 +22,6 @@ struct AddVaultV: View {
             }
             .navigationTitle("Add Vault")
         }
-        .onAppear {
-            controller.checkForVaults()
-        }
     }
 }
 
