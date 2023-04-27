@@ -73,7 +73,7 @@ void displaySetupStatus() {
 /// @param topic Topic from MQTT
 /// @param payload MQTT response
 /// @param length Length of MQTT response
-void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
+void vaultCheckSetup(char *topic, uint8_t *payload, unsigned int length) {
   Serial.println("Got a response");
   StaticJsonDocument<200> JSONResponse;                                                       // JSON document
   DeserializationError error = deserializeJson(JSONResponse, payload);                        // Convert MQTT response to JSON
@@ -110,9 +110,9 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
 }
 
 /// @brief Basic function to kickoff setup by setting the confirmSetup to be the callback
-void setupVault() {
+void beginVaultSetup() {
   displaySetupStatus();
-  mqttConnection::MQTTClient.setCallback(confirmSetup);
+  mqttConnection::MQTTClient.setCallback(vaultCheckSetup);
 }
 
 void setup() {
@@ -130,11 +130,11 @@ void setup() {
   doorServo.write(0);                     // Move servo to starting position
   
   randomSeed(analogRead(0));              // Setup the random seed
-  vaultID = random(50001);              // Choose a random number from 0 - 50,000
+  vaultID = random(50001);                // Choose a random number from 0 - 50,000
   
   digitalWrite(LED_B_PIN, HIGH);          // Set LED to blue
   
-  setupVault();                           // Enter setup mode
+  beginVaultSetup();                      // Enter setup mode
 }
 
 void loop() {
