@@ -44,7 +44,7 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
 
 /// @brief Let the phone know it's ok to setup, and that it's beginning
 /// @param phoneID Phone that sent the request
-void enterSetup(int phoneID) {
+void enterSetup(string phoneID) {
   Serial.println("Entering setup.");                                      // Print status
   StaticJsonDocument<200> doc;                                            // Create a json doc
   doc["phoneID"] = phoneID;                                               // ID of the phone
@@ -84,7 +84,8 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
   }
 
   if (JSONResponse.containsKey("phoneID") && JSONResponse.containsKey("requestType")) {       // If the response has a "request type" and phoneID field
-    int phoneID = JSONResponse["phoneID"];                                                    // Save the ID of the phone
+    string phoneID = JSONResponse["phoneID"];                                                    // Save the ID of the phone
+    Serial.println(phoneID.c_str());
     string requestType = JSONResponse["requestType"];                                         // Save the request type
     Serial.print("Request type is: ");
     Serial.println(requestType.c_str());
@@ -105,6 +106,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
   else {
     Serial.println("Invalid JSON response");
   }
+  Serial.println("\n\n\n");
 }
 
 /// @brief Basic function to kickoff setup by setting the confirmSetup to be the callback

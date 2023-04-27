@@ -16,7 +16,7 @@ final class ContentViewModel: ObservableObject {
     
     /// Checks the user's ID to see if the login page should be dismissed
     internal func determineLoginStatus(newId: String?) {
-        print("User id: \(UserM.shared.userID ?? 0)")
+        print("User id: \(UserM.shared.userID ?? "")")
         if newId != nil {
             showLoginPage = false
         }
