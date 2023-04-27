@@ -14,7 +14,11 @@ final class VaultManagerM: ObservableObject {
     @Published public var mqtt: MQTTManagerM
     
     /// Vaults in need of being configured
-    @Published public var vaultsToConfigure: [VaultM]
+    @Published public var vaultsToConfigure: [VaultM] {
+        didSet {
+            self.objectWillChange.send()
+        }
+    }
     
     /// Resets the vaultsToConfigure list and begins stream of vaults that need configuring
     public func checkVaultsToConfigure() {

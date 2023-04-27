@@ -3,16 +3,16 @@
 import SwiftUI
 
 struct AddVaultV: View {
-    @ObservedObject var controller: AddVaultVM
+    @StateObject var controller: AddVaultVM
     
     init() {
-        self._controller = ObservedObject(initialValue: AddVaultVM())
+        self._controller = StateObject(wrappedValue: AddVaultVM())
     }
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(controller.vaultManager.vaultsToConfigure) { vault in
+                ForEach(VaultManagerM.shared.vaultsToConfigure) { vault in
                     NavigationLink(destination: {
                         ConfigureVaultV(vault: vault)
                     }, label: {

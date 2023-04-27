@@ -1,16 +1,25 @@
 // Ben Roberts
 
+import Combine
 import SwiftUI
 
 final class AddVaultVM: ObservableObject {
-    @ObservedObject var vaultManager: VaultManagerM
+    private var cancellables: Set<AnyCancellable>
     
     init() {
-        self.vaultManager = VaultManagerM.shared
+        cancellables = []
+        
+        VaultManagerM.shared.objectWillChange.sink { _ in
+            DispatchQueue.main.async {
+                 self.objectWillChange.send()
+             }
+        }
+        .store(in: &cancellables)
+        
         checkForVaults()
     }
     
     internal func checkForVaults() {
-        vaultManager.checkVaultsToConfigure()
+        VaultManagerM.shared.checkVaultsToConfigure()
     }
 }
