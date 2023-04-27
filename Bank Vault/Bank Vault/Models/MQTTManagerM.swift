@@ -55,7 +55,9 @@ final class MQTTManagerM: ObservableObject {
                     print(String(decoding: rawData, as: UTF8.self))                                                     // Debug message
                     if let decodedData = try? JSONDecoder().decode(ArdunioNeedsSetup.self, from: rawData) {             // Decode JSON into ArduinoSetupRequest struct
                         if decodedData.setupResponse == "Needs setup" {
-                            VaultManagerM.shared.vaultsToConfigure.append(decodedData.vault)                                // Add the vault to the list of vaults in need of configuring
+                            if !VaultManagerM.shared.vaultsToConfigure.contains(where: { $0.id == decodedData.vault.id }) {
+                                VaultManagerM.shared.vaultsToConfigure.append(decodedData.vault)                            // Add the vault to the list of vaults in need of configuring
+                            }
                         }
                     }
                 }
