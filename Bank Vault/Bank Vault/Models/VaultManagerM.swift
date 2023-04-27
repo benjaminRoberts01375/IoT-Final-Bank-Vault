@@ -8,6 +8,7 @@ final class VaultManagerM: ObservableObject {
     public static var shared = VaultManagerM()
     private init() {
         self.vaultsToConfigure = []
+        self.userVaults = []
         self.mqtt = MQTTManagerM()
     }
     
@@ -15,6 +16,12 @@ final class VaultManagerM: ObservableObject {
     
     /// Vaults in need of being configured
     @Published public var vaultsToConfigure: [VaultM] {
+        didSet {
+            self.objectWillChange.send()
+        }
+    }
+    /// Vaults already setup
+    @Published public var userVaults: [VaultM] {
         didSet {
             self.objectWillChange.send()
         }

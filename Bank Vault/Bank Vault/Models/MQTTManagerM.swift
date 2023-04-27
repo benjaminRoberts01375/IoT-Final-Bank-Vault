@@ -60,6 +60,15 @@ final class MQTTManagerM: ObservableObject {
                             }
                         }
                     }
+                    else if let decodedData = try? JSONDecoder().decode(ArduinoIsSetup.self, from: rawData) {            // Decode JSON into ArduinoSetupRequest struct
+                        if decodedData.confirmSetup &&
+                            VaultManagerM.shared.vaultsToConfigure.contains(where: { $0.id == decodedData.vault.id }) &&
+                            decodedData.phoneID == UserM.shared.userID
+                        {
+                            VaultManagerM.shared.vaultsToConfigure.append(decodedData.vault)                            // Add the vault to the list of vaults in need of configuring
+                            VaultManagerM.shared.checkVaultsToConfigure()
+                        }
+                    }
                 }
             }
         
