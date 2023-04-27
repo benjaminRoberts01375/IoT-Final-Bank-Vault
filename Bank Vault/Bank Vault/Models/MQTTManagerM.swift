@@ -20,7 +20,8 @@ final class MQTTManagerM {
         self.topic = "setup"
     }
     
-    private func connect() -> MQTTClient {
+    public func connect() {
+        print("Connecting to MQTT")
         let mqtt = MQTTClient(                          // MQTT Configuration
             configuration: .init(
                 target: .host(broker, port: port),          // Host and port
@@ -50,7 +51,10 @@ final class MQTTManagerM {
                 }
             }
         
-        return mqtt
+        self.mqtt = mqtt
+    public func connectToSetup() {
+        connect()
+        self.mqtt?.subscribe(to: setupTopic, qos: .exactlyOnce)
     }
     
 }
