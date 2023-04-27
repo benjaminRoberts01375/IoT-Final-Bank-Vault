@@ -13,8 +13,8 @@ struct AddVaultV: View {
         NavigationStack {
             List {
                 ForEach(VaultManagerM.shared.vaultsToConfigure) { vault in
-                    NavigationLink(destination: {
-                        ConfigureVaultV(vault: vault)
+                    Button(action: {
+                        
                     }, label: {
                         Text("Vault - \(vault.id)")
                     })
