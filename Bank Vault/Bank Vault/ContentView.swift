@@ -7,7 +7,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            if UserM.shared.vaults.isEmpty {
+            if VaultManagerM.shared.userVaults.isEmpty {
                 VStack {
                     Spacer()
                     Text("NO AVAILABLE VAULTS")
@@ -18,7 +18,7 @@ struct ContentView: View {
             }
             else {
                 List {
-                    ForEach(Array(UserM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
+                    ForEach(Array(VaultManagerM.shared.userVaults.enumerated()), id: \.element.id) { index, vault in
                         NavigationLink(destination: {
                             
                         }, label: {
@@ -46,7 +46,7 @@ struct ContentView: View {
                     }, label: {
                         Text("Done")
                     })
-                    .disabled(UserM.shared.vaults.isEmpty)
+                    .disabled(VaultManagerM.shared.userVaults.isEmpty)
                 }
                 else {
                     Button(action: {                                // Edit mode button

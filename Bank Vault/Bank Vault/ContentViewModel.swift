@@ -9,7 +9,7 @@ final class ContentViewModel: ObservableObject {
     @Published var editMode: Bool
     
     init() {
-        self.editMode = UserM.shared.vaults.isEmpty
+        self.editMode = VaultManagerM.shared.userVaults.isEmpty
         self.showLoginPage = true
         VaultManagerM.shared.connectMQTT()
     }
