@@ -8,6 +8,6 @@ class VaultM: Codable, Identifiable, ObservableObject {
     let id: Int
     /// Name of the vault
     var name: String?
-    /// 512 hash of user info to determine if the user is allowed to conenct to a vault
-    var accessor: Int?
+    /// ID of the user authorized to access the vault
+    var accessor: String?
 }

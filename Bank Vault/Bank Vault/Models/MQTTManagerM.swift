@@ -65,6 +65,8 @@ final class MQTTManagerM: ObservableObject {
                             VaultManagerM.shared.vaultsToConfigure.contains(where: { $0.id == decodedData.vault.id }) &&
                             decodedData.phoneID == UserM.shared.userID
                         {
+                            guard let userID = UserM.shared.userID else { return }
+                            decodedData.vault.accessor = userID
                             VaultManagerM.shared.vaultsToConfigure.append(decodedData.vault)                            // Add the vault to the list of vaults in need of configuring
                             VaultManagerM.shared.checkVaultsToConfigure()
                         }
