@@ -19,7 +19,7 @@ struct ContentView: View {
             else {
                 List {
                     ForEach(Array(UserM.shared.vaults.enumerated()), id: \.element.id) { index, vault in
-                        Button(action: {
+                        NavigationLink(destination: {
                             
                         }, label: {
                             Text(vault.name ?? "")
