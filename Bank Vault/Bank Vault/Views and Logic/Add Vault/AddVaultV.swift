@@ -21,6 +21,13 @@ struct AddVaultV: View {
                 }
             }
             .navigationTitle("Add Vault")
+            .toolbar(content: {
+                Button(action: {                    // Refresh button
+                    controller.checkForVaults()
+                }, label: {
+                    Text("Refresh")
+                })
+            })
         }
     }
 }
