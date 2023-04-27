@@ -22,4 +22,8 @@ final class AddVaultVM: ObservableObject {
     internal func checkForVaults() {
         VaultManagerM.shared.checkVaultsToConfigure()
     }
+    
+    internal func addVault(_ vault: VaultM) {
+        VaultManagerM.shared.addVault(vault: vault)
+    }
 }

@@ -29,4 +29,8 @@ final class VaultManagerM: ObservableObject {
     public func connectMQTT() {
         mqtt.connect()
     }
+    
+    public func addVault(vault: VaultM) {
+        mqtt.setupVault(vault)
+    }
 }

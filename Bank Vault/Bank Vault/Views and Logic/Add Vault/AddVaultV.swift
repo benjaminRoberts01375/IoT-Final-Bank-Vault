@@ -13,11 +13,22 @@ struct AddVaultV: View {
         NavigationStack {
             List {
                 ForEach(VaultManagerM.shared.vaultsToConfigure) { vault in
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("Vault - \(vault.id)")
-                    })
+                    HStack {
+                        Text("Vault #\(vault.id)")
+                        Spacer()
+                        Button(action: {
+                            controller.addVault(vault)
+                        }, label: {
+                            HStack {
+                                Image(systemName: "plus.circle.fill")
+                                Text("Add")
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(.quaternary)
+                            .cornerRadius(20)
+                        })
+                    }
                 }
             }
             .navigationTitle("Add Vault")

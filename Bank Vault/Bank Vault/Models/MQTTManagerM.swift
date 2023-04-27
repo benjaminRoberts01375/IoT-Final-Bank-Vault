@@ -106,4 +106,9 @@ final class MQTTManagerM: ObservableObject {
         connectToSetup()
         sendData(data: CheckUnconfiguredVaults(), topic: setupTopic)
     }
+    
+    public func setupVault(_ vault: VaultM) {
+//        connectToSetup()
+        sendData(data: RequestToSetupVault(vault: vault), topic: setupTopic)
+    }
 }
