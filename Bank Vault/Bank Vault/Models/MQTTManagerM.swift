@@ -25,7 +25,7 @@ final class MQTTManagerM {
             configuration: .init(
                 target: .host(broker, port: port),          // Host and port
                 protocolVersion: .version5,                 // MQTT v5
-                clientId: "clientId-iOS",                   // Client ID
+                clientId: "theIOSDevice",                   // Client ID
                 clean: true,                                // I dunno
                 credentials: .none,                         // No credentials
                 willMessage: .none,                         // No leaving message?
