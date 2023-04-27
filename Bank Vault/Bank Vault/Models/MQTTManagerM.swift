@@ -4,20 +4,30 @@ import Combine
 import MQTTNIO
 import SwiftUI
 
-final class MQTTManagerM {
+final class MQTTManagerM: ObservableObject {
     let broker: String
     let port: Int
     var topic: String
     var setupTopic: String
     var mqtt: MQTTClient?
     var cancellablePublisher: AnyCancellable?
-    var cancellableConnection: AnyCancellable?
+    var cancellableConnected: AnyCancellable?
+    var cancellableDisconnected: AnyCancellable?
+    var cancellableReconnecting: AnyCancellable?
+    @Published var connectionStatus: ConnectionStatus
     
     init() {
         self.broker = "broker.emqx.io"
         self.port = 1883
         self.setupTopic = "setup"
         self.topic = "setup"
+        self.connectionStatus = .disconnected
+    }
+    
+    public enum ConnectionStatus {
+        case connected
+        case reconnecting
+        case disconnected
     }
     
     public func connect() {
@@ -51,7 +61,34 @@ final class MQTTManagerM {
                 }
             }
         
+        self.cancellableConnected = mqtt.connectPublisher                                                       // Setup background updates for successful connection
+            .sink(receiveValue: { connection in
+                DispatchQueue.main.async {                                                                          // Run on main thread
+                    print("Conencted to broker")
+                    self.connectionStatus = .connected
+                    self.objectWillChange.send()
+                }
+            })
+        self.cancellableDisconnected = mqtt.disconnectPublisher                                                 // Setup background updates for successful connection
+            .sink(receiveValue: { connection in
+                DispatchQueue.main.async {                                                                          // Run on main thread
+                    print("Disconnected from broker")
+                    self.connectionStatus = .disconnected
+                    self.objectWillChange.send()
+                }
+            })
+        self.cancellableReconnecting = mqtt.reconnectPublisher                                                  // Setup background updates for successful connection
+            .sink(receiveValue: { connection in
+                DispatchQueue.main.async {                                                                          // Run on main thread
+                    print("Reconnecting to broker")
+                    self.connectionStatus = .reconnecting
+                    self.objectWillChange.send()
+                }
+            })
+        
         self.mqtt = mqtt
+    }
+    
     public func connectToSetup() {
         connect()
         self.mqtt?.subscribe(to: setupTopic, qos: .exactlyOnce)
