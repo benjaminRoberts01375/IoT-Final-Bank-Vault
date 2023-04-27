@@ -22,7 +22,7 @@ struct ContentView: View {
                         NavigationLink(destination: {
                             
                         }, label: {
-                            Text(vault.name ?? "")
+                            Text(vault.name ?? "Vault - #\(vault.id)")
                         })
                         .transition(.opacity)
                     }
