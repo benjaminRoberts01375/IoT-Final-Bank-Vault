@@ -3,7 +3,7 @@
 import SwiftUI
 
 final class AddVaultVM: ObservableObject {
-    @Published var vaultManager: VaultManagerM
+    @ObservedObject var vaultManager: VaultManagerM
     
     init() {
         self.vaultManager = VaultManagerM.shared

@@ -3,10 +3,10 @@
 import SwiftUI
 
 struct AddVaultV: View {
-    @StateObject var controller: AddVaultVM
+    @ObservedObject var controller: AddVaultVM
     
     init() {
-        self._controller = StateObject(wrappedValue: AddVaultVM())
+        self._controller = ObservedObject(initialValue: AddVaultVM())
     }
     
     var body: some View {
