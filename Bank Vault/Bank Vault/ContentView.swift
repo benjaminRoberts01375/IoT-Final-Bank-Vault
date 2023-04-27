@@ -56,9 +56,9 @@ struct ContentView: View {
                     })
                 }
             }
-//            .fullScreenCover(isPresented: $controller.showLoginPage) {
-//                UserLoginV()
-//            }
+            .fullScreenCover(isPresented: $controller.showLoginPage) {
+                UserLoginV()
+            }
         }
     }
 }
