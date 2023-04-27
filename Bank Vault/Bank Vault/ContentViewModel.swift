@@ -11,6 +11,7 @@ final class ContentViewModel: ObservableObject {
     init() {
         self.editMode = UserM.shared.vaults.isEmpty
         self.showLoginPage = true
+        VaultManagerM.shared.connectMQTT()
     }
     
     /// Checks the user's ID to see if the login page should be dismissed
