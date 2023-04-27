@@ -58,13 +58,11 @@ void enterSetup(int phoneID) {
 }
 
 /// @brief Broadcasts if this vault needs to be setup
-/// @param phoneID Phone ID that sent the request
-void displaySetupStatus(int phoneID) {
+void displaySetupStatus() {
   Serial.println("Displaying setup status.");
   StaticJsonDocument<200> doc;                                            // JSON document
   JsonObject vaultInfo = doc.createNestedObject("vault");                 // Create vault info 
   vaultInfo["id"] = vaultID;                                              // Add the ID of the vault
-  doc["phoneID"] = phoneID;                                               // Set the phone ID
   doc["setupResponse"] = "Needs setup";                                   // Set the response
   string jsonString;
   serializeJson(doc, jsonString);                                         // Serialize JSON to a string
@@ -100,7 +98,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
       }
     }
     else if (requestType == mqttConnection::checkSetup) {                                     // If the request type was asking if this vault needed setting up
-      displaySetupStatus(phoneID);                                                              // Display response
+      displaySetupStatus();                                                                   // Display response
     }
     Serial.println("Unknown request");
   }
@@ -111,6 +109,7 @@ void confirmSetup(char *topic, uint8_t *payload, unsigned int length) {
 
 /// @brief Basic function to kickoff setup by setting the confirmSetup to be the callback
 void setupVault() {
+  displaySetupStatus();
   mqttConnection::MQTTClient.setCallback(confirmSetup);
 }
 
