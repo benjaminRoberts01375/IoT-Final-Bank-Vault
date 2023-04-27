@@ -7,9 +7,10 @@ final class AddVaultVM: ObservableObject {
     
     init() {
         self.vaultManager = VaultManagerM.shared
+        checkForVaults()
     }
     
     internal func checkForVaults() {
-        
+        vaultManager.checkVaultsToConfigure()
     }
 }
