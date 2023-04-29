@@ -43,7 +43,7 @@ void mqttConnection::clientCallback(char *topic, uint8_t *payload, unsigned int 
     String message = buff;
 }
 
-bool mqttConnection::jsonCheck(uint8_t *payload, string phoneID) {
+bool mqttConnection::jsonCheck(uint8_t *payload, string phoneID, bool checkVaultID = true) {
     StaticJsonDocument<200> doc;
     DeserializationError error = deserializeJson(doc, payload);
 
@@ -64,20 +64,22 @@ bool mqttConnection::jsonCheck(uint8_t *payload, string phoneID) {
         }
     }
 
-    if (!doc.containsKey("vault")) {                        // No vault object
-        Serial.println("No vault provided");
-        return false;
-    }
+    if (checkVaultID) {
+        if (!doc.containsKey("vault")) {                        // No vault object
+            Serial.println("No vault provided");
+            return false;
+        }
 
-    JsonObject vaultInfo = doc["vault"].as<JsonObject>();
-    if (!vaultInfo.containsKey("id")) {                     // No vault ID
-        Serial.println("No vault id provided");
-        return false;
-    }
+        JsonObject vaultInfo = doc["vault"].as<JsonObject>();
+        if (!vaultInfo.containsKey("id")) {                     // No vault ID
+            Serial.println("No vault id provided");
+            return false;
+        }
 
-    if (!vaultInfo["id"] == vaultID) {                      // Wrong vault ID
-        Serial.println("Not for this vault");
-        return false;
+        if (!vaultInfo["id"] == vaultID) {                      // Wrong vault ID
+            Serial.println("Not for this vault");
+            return false;
+        }
     }
 
     return true;

@@ -27,8 +27,9 @@ namespace mqttConnection
     /// @brief Checks a payload to see if it's meant for this Arduino
     /// @param payload Payload from MQTT
     /// @param phoneID Phone ID to check
+    /// @param checkVaultID Bool to dictate the vault ID
     /// @return A boolean for if the JSON is valid
-    bool jsonCheck(uint8_t *payload, string phoneID);
+    bool jsonCheck(uint8_t *payload, string phoneID, bool checkVault = true);
 
     const string requestSetup = "request setup";
     const string checkSetup = "check setup";
