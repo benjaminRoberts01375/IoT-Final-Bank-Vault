@@ -12,20 +12,20 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
   StaticJsonDocument<200> JSONResponse;
   deserializeJson(JSONResponse, payload);
   if (mqttConnection::jsonCheck(JSONResponse, setupPhoneID)) {
-    Serial.println("Valid JSON");     
+    Serial.println("Valid JSON");
     string phoneID = JSONResponse["phoneID"];                                   // Save the phone ID
-    int index = 0;      
+    int index = 0;
     for (int i = 0; i < sizeof(phoneIDs); i++) {                              // For each index in the phoneIDs array...
       if (phoneIDs[index] == JSONResponse["phoneID"]) {                         // Check for the existing entry
         return;                                                                   // Return
-      }     
+      }
       else if (phoneIDs[index] != "") {                                         // If there's NOT an empty entry in the phoneIDs...
         index += 1;                                                               // Keep searching...
-      }     
+      }
       else {                                                                    // An empty index was found
-        break;      
-      }     
-    }     
+        break;
+      }
+    }
     phoneIDs[index] = phoneID;                                                // Add the phone ID to the array
     Serial.println("Added phone id to list");
     setupPhoneID = "";                                                        // Reset the stored phoneID
