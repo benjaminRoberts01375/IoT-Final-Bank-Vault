@@ -3,6 +3,8 @@
 int loops = 1;
 string phoneIDs[100] = { };
 string setupPhoneID = "";
+bool allowedOpen = false;
+bool isOpen = false;
 
 /// @brief Sets up vault based on phone request
 /// @param topic MQTT topic
@@ -117,11 +119,28 @@ void loop() {
 
   if (buttonState == LOW) {
       doorServo.write(180);
+      isOpen = false;
+      digitalWrite(LED_R_PIN, HIGH);
+      digitalWrite(LED_G_PIN, HIGH);
+      digitalWrite(LED_B_PIN, LOW);
   }
   else {
       doorServo.write(0);
+      if (!isOpen) {
+        if (!allowedOpen) {
+          Serial.println("Vault has been broken into");
+          digitalWrite(LED_R_PIN, HIGH);
+          digitalWrite(LED_G_PIN, LOW);
+          digitalWrite(LED_B_PIN, LOW);
+        }
+        else if (allowedOpen) {
+          digitalWrite(LED_R_PIN, LOW);
+          digitalWrite(LED_G_PIN, HIGH);
+          digitalWrite(LED_B_PIN, LOW);
+        }
+        isOpen = true;
+      }
   }
-
   // if (millis() / (5000 * loops) >= 1.0) {
   //   loops += 1;
   //   Serial.println("Sending...");
