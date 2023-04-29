@@ -12,6 +12,8 @@ string setupPhoneID = "";
 bool allowedOpen = false;
 bool isOpen = false;
 
+WiFiClient iftttClient;
+
 const int maxDoorTrackerEvents = 200;
 doorStatusM doorTracker[maxDoorTrackerEvents] = { };
 int trackedEvents = 0;
@@ -49,6 +51,34 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
     setupPhoneID = "";                                                        // Reset the stored phoneID
     mqttConnection::MQTTClient.setCallback(mqttConnection::clientCallback);   // Reset the callback function
   }
+}
+
+void callWebhook() {
+  StaticJsonDocument<200> doc;
+  doc["value1"] = "Hello from Arduino land!";
+  doc["value2"] = iftttEvent;
+  doc["value3"] = vaultID;
+  iftttClient.connect(iftttURL.c_str(), iftttPort);
+  string json;
+  serializeJson(doc, json);
+  String requestInfo = "";
+  requestInfo.concat("POST /trigger/");
+  requestInfo.concat(iftttEvent.c_str());
+  requestInfo.concat("/with/key/");
+  requestInfo.concat(iftttKey.c_str());
+  requestInfo.concat(" HTTP/1.1\r\n");
+  requestInfo.concat("Host: ");
+  requestInfo.concat(iftttURL.c_str());
+  requestInfo.concat("\r\n");
+  requestInfo.concat("Content-Type: application/json\r\n");
+  requestInfo.concat("Content-Length: ");
+  requestInfo.concat(json.length());
+  requestInfo.concat("\r\n");
+  requestInfo.concat("\r\n");
+  requestInfo.concat(json.c_str());
+  Serial.println(requestInfo.c_str());
+  iftttClient.print(requestInfo.c_str());
+  iftttClient.stop();
 }
 
 /// @brief Let the phone know it's ok to setup, and that it's beginning
@@ -151,6 +181,7 @@ void loop() {
           digitalWrite(LED_R_PIN, HIGH);
           digitalWrite(LED_G_PIN, LOW);
           digitalWrite(LED_B_PIN, LOW);
+          callWebhook();
         }
         else if (allowedOpen) {
           digitalWrite(LED_R_PIN, LOW);
