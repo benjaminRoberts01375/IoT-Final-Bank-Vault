@@ -134,11 +134,14 @@ void loop() {
   mqttConnection::MQTTClient.loop();
 
   if (buttonState == LOW) {
-      doorServo.write(180);
-      isOpen = false;
-      digitalWrite(LED_R_PIN, HIGH);
-      digitalWrite(LED_G_PIN, HIGH);
-      digitalWrite(LED_B_PIN, LOW);
+    if (isOpen) {
+        doorServo.write(180);
+        isOpen = false;
+        digitalWrite(LED_R_PIN, HIGH);
+        digitalWrite(LED_G_PIN, HIGH);
+        digitalWrite(LED_B_PIN, LOW);
+        trackDoorStatus();
+    }
   }
   else {
       doorServo.write(0);
@@ -155,6 +158,7 @@ void loop() {
           digitalWrite(LED_B_PIN, LOW);
         }
         isOpen = true;
+        trackDoorStatus();
       }
   }
   // if (millis() / (5000 * loops) >= 1.0) {
