@@ -28,6 +28,7 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
     }     
     phoneIDs[index] = phoneID;                                                // Add the phone ID to the array
     Serial.println("Added phone id to list");
+    setupPhoneID = "";                                                        // Reset the stored phoneID
     mqttConnection::MQTTClient.setCallback(mqttConnection::clientCallback);   // Reset the callback function
   }
 }
