@@ -24,12 +24,12 @@ namespace mqttConnection
     /// @return The interpreted message
     void clientCallback(char *topic, uint8_t *payload, unsigned int length);
 
-    /// @brief Checks a payload to see if it's meant for this Arduino
-    /// @param payload Payload from MQTT
+    /// @brief Checks a JSON document to see if it's meant for this Arduino
+    /// @param doc JSON document to check
     /// @param phoneID Phone ID to check
     /// @param checkVaultID Bool to dictate the vault ID
     /// @return A boolean for if the JSON is valid
-    bool jsonCheck(uint8_t *payload, string phoneID, bool checkVault = true);
+    bool jsonCheck(StaticJsonDocument<200> doc, string phoneID, bool checkVaultID = true);
 
     const string requestSetup = "request setup";
     const string checkSetup = "check setup";

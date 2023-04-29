@@ -43,15 +43,7 @@ void mqttConnection::clientCallback(char *topic, uint8_t *payload, unsigned int 
     String message = buff;
 }
 
-bool mqttConnection::jsonCheck(uint8_t *payload, string phoneID, bool checkVaultID = true) {
-    StaticJsonDocument<200> doc;
-    DeserializationError error = deserializeJson(doc, payload);
-
-    if (error) {                                            // Serialization error
-        Serial.println("Error deserializing JSON");
-        return false;
-    }
-
+bool mqttConnection::jsonCheck(StaticJsonDocument<200> doc, string phoneID, bool checkVaultID) {
     if (phoneID != "") {                                    // If a phone ID is provided...
         if (!doc.containsKey("phoneID")) {                      // No phone ID
             Serial.println("JSON did not contain a phone ID");
