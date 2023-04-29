@@ -1,5 +1,11 @@
 #include "main.h"
 
+struct doorStatusM {
+    bool isAllowedOpen;
+    bool wasOpened;
+    unsigned long time;
+};
+
 int loops = 1;
 string phoneIDs[100] = { };
 string setupPhoneID = "";
