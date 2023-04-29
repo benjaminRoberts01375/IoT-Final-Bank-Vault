@@ -73,39 +73,20 @@ void displaySetupStatus() {
 /// @param payload MQTT response
 /// @param length Length of MQTT response
 void vaultCheckSetup(char *topic, uint8_t *payload, unsigned int length) {
-  Serial.println("Got a response");
   StaticJsonDocument<200> JSONResponse;                                                       // JSON document
-  DeserializationError error = deserializeJson(JSONResponse, payload);                        // Convert MQTT response to JSON
-
-  if (error) {                                                                                // Check if MQTT response was JSON
-    Serial.println("Not able to serialize the confirmation JSON.");
-    return;
-  }
-
-  if (JSONResponse.containsKey("phoneID") && JSONResponse.containsKey("requestType")) {       // If the response has a "request type" and phoneID field
-    string phoneID = JSONResponse["phoneID"];                                                    // Save the ID of the phone
-    Serial.println(phoneID.c_str());
-    string requestType = JSONResponse["requestType"];                                         // Save the request type
-    Serial.print("Request type is: ");
-    Serial.println(requestType.c_str());
-    if (requestType == mqttConnection::requestSetup && JSONResponse.containsKey("vault")) {     // If a vault object exists
-      JsonObject nestedObj = JSONResponse["vault"].as<JsonObject>();                              // Save the vault object
-      if (nestedObj.containsKey("id") && nestedObj["id"] == vaultID) {                            // If a vault ID is specified
-        enterSetup(phoneID);                                                                        // Enter setup for this vault
+  deserializeJson(JSONResponse, payload);
+  if (mqttConnection::jsonCheck(JSONResponse, "", false)) {  
+    if (JSONResponse.containsKey("requestType")) {
+      if (JSONResponse["requestType"] == mqttConnection::checkSetup) {
+        displaySetupStatus();
       }
-      else {
-        Serial.println("No ID specified, or ID was incorrect");
+      else if (JSONResponse["requestType"] == mqttConnection::requestSetup && 
+      mqttConnection::jsonCheck(JSONResponse, "") &&
+      JSONResponse.containsKey("phoneID")) {
+        enterSetup(JSONResponse["phoneID"]);
       }
     }
-    else if (requestType == mqttConnection::checkSetup) {                                     // If the request type was asking if this vault needed setting up
-      displaySetupStatus();                                                                   // Display response
-    }
-    Serial.println("Unknown request");
   }
-  else {
-    Serial.println("Invalid JSON response");
-  }
-  Serial.println("\n\n\n");
 }
 
 /// @brief Basic function to kickoff setup by setting the confirmSetup to be the callback
