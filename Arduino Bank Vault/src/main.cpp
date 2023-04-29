@@ -2,22 +2,16 @@
 
 int loops = 1;
 string phoneIDs[100] = { };
+string setupPhoneID = "";
 
 /// @brief Sets up vault based on phone request
 /// @param topic MQTT topic
 /// @param payload MQTT response
 /// @param length Length of MQTT response
 void configureVault(char *topic, uint8_t *payload, unsigned int length) {
-  Serial.println("Response for configuring vault");
-  StaticJsonDocument<200> JSONResponse;                                 // MQTT document
-  DeserializationError error = deserializeJson(JSONResponse, payload);  // Deserialize MQTT response to JSON
-
-  if (error) {                                                          // Check for errors
-    Serial.println("Not able to serialize the confirmation JSON.");
-    return;
-  }
-
-  if (JSONResponse.containsKey("phoneID")) {                                  // If there's a phone ID
+  StaticJsonDocument<200> JSONResponse;
+  deserializeJson(JSONResponse, payload);
+  if (mqttConnection::jsonCheck(JSONResponse, setupPhoneID)) {
     Serial.println("Valid JSON");     
     string phoneID = JSONResponse["phoneID"];                                   // Save the phone ID
     int index = 0;      
@@ -36,15 +30,13 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
     Serial.println("Added phone id to list");
     mqttConnection::MQTTClient.setCallback(mqttConnection::clientCallback);   // Reset the callback function
   }
-  else {
-    Serial.println("Invalid JSON response");
-  }
 }
 
 /// @brief Let the phone know it's ok to setup, and that it's beginning
 /// @param phoneID Phone that sent the request
 void enterSetup(string phoneID) {
   Serial.println("Entering setup.");                                      // Print status
+  setupPhoneID = phoneID;                                                 // Cache the phone ID to prevent incorrect phone trying to connect
   StaticJsonDocument<200> doc;                                            // Create a json doc
   doc["phoneID"] = phoneID;                                               // ID of the phone
   doc["confirmSetup"] = true;                                             // Inform the mobile device that setup is a go
