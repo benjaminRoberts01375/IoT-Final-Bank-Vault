@@ -12,6 +12,16 @@ string setupPhoneID = "";
 bool allowedOpen = false;
 bool isOpen = false;
 
+const int maxDoorTrackerEvents = 200;
+doorStatusM doorTracker[maxDoorTrackerEvents] = { };
+int trackedEvents = 0;
+
+/// @brief Adds and overwrites the door tracker values
+void trackDoorStatus() {
+  doorTracker[trackedEvents] = { allowedOpen, isOpen, millis() };
+  trackedEvents = (trackedEvents + 1) % maxDoorTrackerEvents;
+}
+
 /// @brief Sets up vault based on phone request
 /// @param topic MQTT topic
 /// @param payload MQTT response
