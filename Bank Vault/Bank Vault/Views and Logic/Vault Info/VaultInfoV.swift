@@ -15,7 +15,7 @@ struct VaultInfoV: View {
                 List {
                     ForEach(controller.vault.history?.sorted(
                         by: { (lhs, rhs) -> Bool in
-                            lhs.time < rhs.time
+                            lhs.time > rhs.time
                         }
                     ) ?? []) { interaction in
                         if !interaction.isAllowedOpen && interaction.wasOpened {
