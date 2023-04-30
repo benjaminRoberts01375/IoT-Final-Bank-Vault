@@ -11,5 +11,5 @@ class VaultM: Codable, Identifiable, ObservableObject {
     /// ID of the user authorized to access the vault
     var accessor: String?
     /// History of the vault being interacted with
-    var history: [VaultHistoryM]?
+    var history: [ArduinoInteractionM] = []
 }
