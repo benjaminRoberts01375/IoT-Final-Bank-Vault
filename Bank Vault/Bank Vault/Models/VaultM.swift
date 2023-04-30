@@ -10,4 +10,6 @@ class VaultM: Codable, Identifiable, ObservableObject {
     var name: String?
     /// ID of the user authorized to access the vault
     var accessor: String?
+    /// History of the vault being interacted with
+    var history: [VaultHistoryM]?
 }

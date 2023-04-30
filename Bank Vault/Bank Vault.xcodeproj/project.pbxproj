@@ -25,6 +25,7 @@
 		07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D12C29F5CFB1006EA009 /* UserM.swift */; };
 		07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1629F642C800458BB0 /* UserLoginV.swift */; };
 		07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1929F647CE00458BB0 /* UserLoginVM.swift */; };
+		07FF24AF29FE628D00F35411 /* ArduinoInteractionM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF24AE29FE628D00F35411 /* ArduinoInteractionM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		07B73D1629F642C800458BB0 /* UserLoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginV.swift; sourceTree = "<group>"; };
 		07B73D1829F643C100458BB0 /* Bank Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bank Vault.entitlements"; sourceTree = "<group>"; };
 		07B73D1929F647CE00458BB0 /* UserLoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginVM.swift; sourceTree = "<group>"; };
+		07FF24AE29FE628D00F35411 /* ArduinoInteractionM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoInteractionM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				070C840929F88EF9003B0D45 /* VaultManagerM.swift */,
 				07A5D12A29F5C696006EA009 /* VaultM.swift */,
 				070C840129F78B04003B0D45 /* MQTTManagerM.swift */,
+				07FF24AE29FE628D00F35411 /* ArduinoInteractionM.swift */,
 				070C840D29F8F8C0003B0D45 /* From Ardunio Message Types */,
 				070C840629F88A1A003B0D45 /* To Arduino Message Types */,
 			);
@@ -240,6 +243,7 @@
 				070C840A29F88EF9003B0D45 /* VaultManagerM.swift in Sources */,
 				07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */,
 				070C840C29F8F866003B0D45 /* RequestToSetupVault.swift in Sources */,
+				07FF24AF29FE628D00F35411 /* ArduinoInteractionM.swift in Sources */,
 				078B015E29FA5B6D006380A3 /* ArduinoIsSetup.swift in Sources */,
 				07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */,
 				070C840F29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift in Sources */,
