@@ -40,4 +40,13 @@ final class VaultManagerM: ObservableObject {
     public func addVault(vault: VaultM) {
         mqtt.setupVault(vault)
     }
+    
+    public func addVaultInteraction(_ interaction: ArduinoInteracted) {
+        if let vault = userVaults.first(where: { $0.id == interaction.vault.id }) {                     // Check if we have the vault setup on our end
+            if !(vault.history?.contains(where: { $0.time == interaction.doorStatus.time }) ?? true) {      // If the timecode doesn't exist in our records
+                print("Added \(interaction.doorStatus.time)")
+                vault.history?.append(interaction.doorStatus)                                                   // Add it
+            }
+        }
+    }
 }
