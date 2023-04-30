@@ -26,6 +26,7 @@
 		07B73D1729F642C800458BB0 /* UserLoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1629F642C800458BB0 /* UserLoginV.swift */; };
 		07B73D1A29F647CE00458BB0 /* UserLoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B73D1929F647CE00458BB0 /* UserLoginVM.swift */; };
 		07FF24AF29FE628D00F35411 /* ArduinoInteractionM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF24AE29FE628D00F35411 /* ArduinoInteractionM.swift */; };
+		07FF24B329FE638C00F35411 /* ArduinoInteracted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF24B229FE638C00F35411 /* ArduinoInteracted.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		07B73D1829F643C100458BB0 /* Bank Vault.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bank Vault.entitlements"; sourceTree = "<group>"; };
 		07B73D1929F647CE00458BB0 /* UserLoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginVM.swift; sourceTree = "<group>"; };
 		07FF24AE29FE628D00F35411 /* ArduinoInteractionM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoInteractionM.swift; sourceTree = "<group>"; };
+		07FF24B229FE638C00F35411 /* ArduinoInteracted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoInteracted.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				070C840E29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift */,
 				078B015D29FA5B6D006380A3 /* ArduinoIsSetup.swift */,
+				07FF24B229FE638C00F35411 /* ArduinoInteracted.swift */,
 			);
 			path = "From Ardunio Message Types";
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				070C840829F88A45003B0D45 /* CheckUnconfiguredVaults.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
 				070C840229F78B04003B0D45 /* MQTTManagerM.swift in Sources */,
+				07FF24B329FE638C00F35411 /* ArduinoInteracted.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
