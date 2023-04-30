@@ -72,6 +72,9 @@ final class MQTTManagerM: ObservableObject {
                             VaultManagerM.shared.checkVaultsToConfigure()
                         }
                     }
+                    else if let decodedData = try? JSONDecoder().decode(ArduinoInteracted.self, from: rawData) {
+                        VaultManagerM.shared.addVaultInteraction(decodedData)
+                    }
                 }
             }
         
