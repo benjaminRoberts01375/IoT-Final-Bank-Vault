@@ -20,7 +20,7 @@ struct ContentView: View {
                 List {
                     ForEach(Array(VaultManagerM.shared.userVaults.enumerated()), id: \.element.id) { index, vault in
                         NavigationLink(destination: {
-                            
+                            VaultInfoV(vault: vault)
                         }, label: {
                             Text(vault.name ?? "Vault - #\(vault.id)")
                         })
