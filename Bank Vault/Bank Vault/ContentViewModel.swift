@@ -21,7 +21,6 @@ final class ContentViewModel: ObservableObject {
         VaultManagerM.shared.objectWillChange.sink { _ in
             DispatchQueue.main.async {
                 self.objectWillChange.send()
-                print("Added vault from CVM")
             }
         }
         .store(in: &cancellables)
