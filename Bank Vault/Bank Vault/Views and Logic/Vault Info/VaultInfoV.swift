@@ -28,6 +28,7 @@ struct VaultInfoV: View {
                                     .font(.callout)
                                     .foregroundColor(.secondary)
                                 Text("Vault was \(interaction.isAllowedOpen ? "" : "not ")allowed to be open, and was\(interaction.wasOpened ? "" : "n't") open.")
+                                    .foregroundColor(interaction.isAllowedOpen == interaction.wasOpened ? .green : .orange)
                             }
                         }
                     }
