@@ -123,7 +123,6 @@ final class MQTTManagerM: ObservableObject {
     }
     
     public func setupVault(_ vault: VaultM) {
-//        connectToSetup()
         sendData(data: RequestToSetupVault(vault: vault), topic: setupTopic)
     }
 }
