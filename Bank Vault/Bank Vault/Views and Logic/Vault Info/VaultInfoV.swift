@@ -19,12 +19,12 @@ struct VaultInfoV: View {
                         }
                     ) ?? []) { interaction in
                         if !interaction.isAllowedOpen && interaction.wasOpened {
-                            Text("Security breach at \(interaction.time)")
+                            Text("Security breach at \(interaction.time)ms")
                                 .foregroundColor(.red)
                         }
                         else {
                             VStack(alignment: .leading) {
-                                Text("Time: \(interaction.time)")
+                                Text("Time: \(interaction.time)ms")
                                     .font(.callout)
                                     .foregroundColor(.secondary)
                                 Text("Vault was \(interaction.isAllowedOpen ? "" : "not ")allowed to be open, and was\(interaction.wasOpened ? "" : "n't") open.")
