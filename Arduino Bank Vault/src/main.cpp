@@ -18,10 +18,33 @@ const int maxDoorTrackerEvents = 200;
 doorStatusM doorTracker[maxDoorTrackerEvents] = { };
 int trackedEvents = 0;
 
+/// @brief Sends all the vault history via MQTT. 
+/// This function works around the limits of what can be sent with an Arduino by
+/// having each door interaction be its own MQTT message.
+void sendVaultHistory() {
+  for (int i = 0; i < maxDoorTrackerEvents; i++) {                        // For each door event
+    if (doorTracker[i].time == 0) {                                         // If the time since arduino boot is 0
+      continue;                                                               // Skip it
+    }
+
+    StaticJsonDocument<200> doc;                                            // Create the JSON doc
+    JsonObject vault = doc.createNestedObject("vault");                     // Create the vault object within the JSON doc
+    vault["id"] = vaultID;                                                  // Set the id of the vault
+    JsonObject doorStatus = doc.createNestedObject("doorStatus");           // Create the door status object
+    doorStatus["isAllowedOpen"] = doorTracker[i].isAllowedOpen;             // Set if the door was allowed to be opened
+    doorStatus["wasOpened"] = doorTracker[i].wasOpened;                     // Set if the door was opened
+    doorStatus["time"] = doorTracker[i].time;                               // Set the time of the occurance
+    string jsonString;                                                      // String for holding JSON
+    serializeJson(doc, jsonString);                                         // Serialize json to a string
+    mqttConnection::MQTTClient.publish(topic.c_str(), jsonString.c_str());  // Publish
+  }
+}
+
 /// @brief Adds and overwrites the door tracker values
 void trackDoorStatus() {
   doorTracker[trackedEvents] = { allowedOpen, isOpen, millis() };
   trackedEvents = (trackedEvents + 1) % maxDoorTrackerEvents;
+  sendVaultHistory();
 }
 
 /// @brief Sets up vault based on phone request
