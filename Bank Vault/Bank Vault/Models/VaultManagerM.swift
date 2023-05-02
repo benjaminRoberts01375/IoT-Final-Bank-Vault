@@ -54,4 +54,31 @@ final class VaultManagerM: ObservableObject {
             }
         }
     }
+    
+    /// Removes a connected vault
+    /// - Parameter vault: Vault to remove
+    public func removeVault(_ vault: VaultM) {
+        if userVaults.contains(where: { $0.id == vault.id } ) {
+            mqtt.removeVault(vault)
+            userVaults.removeAll(where: { $0.id == vault.id } )
+        }
+    }
+    
+    /// Open a vault
+    /// - Parameter vault: Vault to open
+    public func openVault(_ vault: VaultM) {
+            mqtt.openVault(vault)
+    }
+    
+    /// Closes a vault
+    /// - Parameter vault: vault to close
+    public func closeVault(_ vault: VaultM) {
+            mqtt.closeVault(vault)
+    }
+    
+    /// Adds a device to a vault
+    /// - Parameter vault: Vault to enter setup for
+    public func addDeviceToVault(_ vault: VaultM) {
+            mqtt.addDeviceToVault(vault)
+    }
 }
