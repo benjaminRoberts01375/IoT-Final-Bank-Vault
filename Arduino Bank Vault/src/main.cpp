@@ -19,6 +19,7 @@ doorStatusM doorTracker[maxDoorTrackerEvents] = { };
 int trackedEvents = 0;
 
 void responseDispatcher(char *topic, uint8_t *payload, unsigned int length);
+
 /// @brief Sends all the vault history via MQTT. 
 /// This function works around the limits of what can be sent with an Arduino by
 /// having each door interaction be its own MQTT message.
@@ -195,6 +196,14 @@ void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
         doorServo.write(180);
         digitalWrite(LED_R_PIN, LOW);
         digitalWrite(LED_G_PIN, HIGH);
+        digitalWrite(LED_B_PIN, LOW);
+      }
+      else if (doc["interaction"] == "closeVault") {
+        Serial.println("Close");
+        allowedOpen = false;
+        doorServo.write(0);
+        digitalWrite(LED_R_PIN, HIGH);
+        digitalWrite(LED_G_PIN, LOW);
         digitalWrite(LED_B_PIN, LOW);
       }
     }
