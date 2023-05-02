@@ -13,8 +13,8 @@ bool isOpen = false;
 
 WiFiClient iftttClient;
 
-const int maxDoorTrackerEvents = 200;
-doorStatusM doorTracker[maxDoorTrackerEvents] = { };
+const int MAX_DOOR_TRACKER_EVENTS = 200;
+doorStatusM doorTracker[MAX_DOOR_TRACKER_EVENTS] = { };
 int trackedEvents = 0;
 
 void responseDispatcher(char *topic, uint8_t *payload, unsigned int length);
@@ -23,7 +23,7 @@ void responseDispatcher(char *topic, uint8_t *payload, unsigned int length);
 /// This function works around the limits of what can be sent with an Arduino by
 /// having each door interaction be its own MQTT message.
 void sendVaultHistory() {
-  for (int i = 0; i < maxDoorTrackerEvents; i++) {                        // For each door event
+  for (int i = 0; i < MAX_DOOR_TRACKER_EVENTS; i++) {                        // For each door event
     if (doorTracker[i].time == 0) {                                         // If the time since arduino boot is 0
       continue;                                                               // Skip it
     }
@@ -44,7 +44,7 @@ void sendVaultHistory() {
 /// @brief Adds and overwrites the door tracker values
 void trackDoorStatus() {
   doorTracker[trackedEvents] = { allowedOpen, isOpen, millis() };
-  trackedEvents = (trackedEvents + 1) % maxDoorTrackerEvents;
+  trackedEvents = (trackedEvents + 1) % MAX_DOOR_TRACKER_EVENTS;
   sendVaultHistory();
 }
 
