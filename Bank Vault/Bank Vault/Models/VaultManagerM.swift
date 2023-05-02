@@ -50,6 +50,7 @@ final class VaultManagerM: ObservableObject {
         if let vault = userVaults.first(where: { $0.id == interaction.vault.id }) {                     // Check if we have the vault setup on our end
             if !(vault.history?.contains(where: { $0.time == interaction.doorStatus.time }) ?? true) {      // If the timecode doesn't exist in our records
                 vault.history?.append(interaction.doorStatus)                                                   // Add it
+                self.objectWillChange.send()
             }
         }
     }
