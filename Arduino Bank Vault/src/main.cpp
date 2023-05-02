@@ -18,6 +18,7 @@ const int maxDoorTrackerEvents = 200;
 doorStatusM doorTracker[maxDoorTrackerEvents] = { };
 int trackedEvents = 0;
 
+void responseDispatcher(char *topic, uint8_t *payload, unsigned int length);
 /// @brief Sends all the vault history via MQTT. 
 /// This function works around the limits of what can be sent with an Arduino by
 /// having each door interaction be its own MQTT message.
@@ -72,7 +73,7 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
     phoneIDs[index] = phoneID;                                                // Add the phone ID to the array
     Serial.println("Added phone id to list");
     setupPhoneID = "";                                                        // Reset the stored phoneID
-    mqttConnection::MQTTClient.setCallback(mqttConnection::clientCallback);   // Reset the callback function
+    mqttConnection::MQTTClient.setCallback(responseDispatcher);               // Reset the callback function
   }
 }
 
@@ -158,6 +159,23 @@ void vaultCheckSetup(char *topic, uint8_t *payload, unsigned int length) {
 void beginVaultSetup() {
   displaySetupStatus();
   mqttConnection::MQTTClient.setCallback(vaultCheckSetup);
+}
+
+void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
+  Serial.println("Got a response");
+  StaticJsonDocument<200> doc;
+  deserializeJson(doc, payload);
+  if (mqttConnection::jsonCheck(doc, "")) {
+    bool validPhone = false;
+    for (int i = 0; i < 10; i++) {
+      if (phoneIDs[i] == doc["phoneID"]) {
+        validPhone = true;
+        break;
+      }
+    }
+    if (validPhone) {
+    }
+  }
 }
 
 void setup() {
