@@ -186,34 +186,31 @@ void loop() {
   mqttConnection::reconnectMQTTClient();
   mqttConnection::MQTTClient.loop();
 
-  if (buttonState == LOW) {
-    if (isOpen) {
-        doorServo.write(180);
-        isOpen = false;
+
+  if (buttonState == HIGH) {
+    doorServo.write(0);
+    if (!isOpen) {
+      if (!allowedOpen) {
+        Serial.println("Vault has been broken into");
         digitalWrite(LED_R_PIN, HIGH);
+        digitalWrite(LED_G_PIN, LOW);
+        digitalWrite(LED_B_PIN, LOW);
+        callWebhook();
+      }
+      else if (allowedOpen) {
+        digitalWrite(LED_R_PIN, LOW);
         digitalWrite(LED_G_PIN, HIGH);
         digitalWrite(LED_B_PIN, LOW);
-        trackDoorStatus();
+      }
+      isOpen = true;
+      trackDoorStatus();
     }
   }
   else {
-      doorServo.write(0);
-      if (!isOpen) {
-        if (!allowedOpen) {
-          Serial.println("Vault has been broken into");
-          digitalWrite(LED_R_PIN, HIGH);
-          digitalWrite(LED_G_PIN, LOW);
-          digitalWrite(LED_B_PIN, LOW);
-          callWebhook();
-        }
-        else if (allowedOpen) {
-          digitalWrite(LED_R_PIN, LOW);
-          digitalWrite(LED_G_PIN, HIGH);
-          digitalWrite(LED_B_PIN, LOW);
-        }
-        isOpen = true;
-        trackDoorStatus();
-      }
+    if (isOpen) {
+      isOpen = false;
+      trackDoorStatus();
+    }
   }
   // if (millis() / (5000 * loops) >= 1.0) {
   //   loops += 1;
