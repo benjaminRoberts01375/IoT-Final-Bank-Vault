@@ -12,6 +12,61 @@ struct VaultInfoV: View {
     var body: some View {
         NavigationStack {
             VStack {
+                HStack {
+                    Spacer()
+                        .overlay(
+                            Button(action: {
+                                controller.openDoor()
+                            }, label: {
+                                Text("Open")
+                                    .frame(minWidth: 55, maxWidth: .infinity, minHeight: 55, maxHeight: 55)
+                                    .background(.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(7)
+                            })
+                        )
+                        .padding(.horizontal, 5)
+                    Spacer()
+                        .overlay(
+                            Button(action: {
+                                controller.closeDoor()
+                            }, label: {
+                                Text("Close")
+                                    .frame(minWidth: 55, maxWidth: .infinity, minHeight: 55, maxHeight: 55)
+                                    .background(.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(7)
+                            })
+                        )
+                        .padding(.horizontal, 5)
+                    Spacer()
+                        .overlay(
+                            Button(action: {
+                                controller.addDevice()
+                            }, label: {
+                                Text("Enter Setup")
+                                    .frame(minWidth: 55, maxWidth: .infinity, minHeight: 55, maxHeight: 55)
+                                    .background(.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(7)
+                            })
+                        )
+                        .padding(.horizontal, 5)
+                    Spacer()
+                        .overlay(
+                            Button(action: {
+                                controller.removeVault()
+                            }, label: {
+                                Text("Remove")
+                                    .frame(minWidth: 55, maxWidth: .infinity, minHeight: 55, maxHeight: 55)
+                                    .background(.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(7)
+                            })
+                        )
+                        .padding(.horizontal, 5)
+                }
+                .padding(.vertical, 20)
                 List {
                     ForEach(controller.vault.history?.sorted(
                         by: { (lhs, rhs) -> Bool in
