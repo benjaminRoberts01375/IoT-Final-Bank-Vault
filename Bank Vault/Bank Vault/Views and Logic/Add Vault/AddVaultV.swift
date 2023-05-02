@@ -16,18 +16,23 @@ struct AddVaultV: View {
                     HStack {
                         Text("Vault #\(vault.id)")
                         Spacer()
-                        Button(action: {
-                            controller.addVault(vault)
-                        }, label: {
-                            HStack {
-                                Image(systemName: "plus.circle.fill")
-                                Text("Add")
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(.quaternary)
-                            .cornerRadius(20)
-                        })
+                        if (VaultManagerM.shared.userVaults.contains(where: { vault.id == $0.id })) {
+                            Text("Added")
+                        }
+                        else {
+                            Button(action: {
+                                controller.addVault(vault)
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "plus.circle.fill")
+                                    Text("Add")
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(.quaternary)
+                                .cornerRadius(20)
+                            })
+                        }
                     }
                 }
             }
