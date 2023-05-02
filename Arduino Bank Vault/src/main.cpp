@@ -6,7 +6,6 @@ struct doorStatusM {
     unsigned long time;
 };
 
-int loops = 1;
 string phoneIDs[100] = { };
 string setupPhoneID = "";
 bool allowedOpen = false;
