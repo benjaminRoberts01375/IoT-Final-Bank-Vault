@@ -32,29 +32,12 @@ struct ContentView: View {
             .edgesIgnoringSafeArea([.bottom, .horizontal])
             .navigationTitle("Your Vaults")
             .toolbar {
-                if controller.editMode {
-                    NavigationLink(                                 // Add vault button
-                        destination: AddVaultV(),
-                        label: {
-                            Text("Add")
-                        }
-                    )
-                    Button(action: {                                // Finish editing button
-                        withAnimation {
-                            controller.editMode.toggle()
-                        }
-                    }, label: {
-                        Text("Done")
-                    })
-                    .disabled(VaultManagerM.shared.userVaults.isEmpty)
-                }
-                else {
-                    Button(action: {                                // Edit mode button
-                        controller.editMode.toggle()
-                    }, label: {
-                        Text("Edit")
-                    })
-                }
+                NavigationLink(                                 // Add vault button
+                    destination: AddVaultV(),
+                    label: {
+                        Text("Add")
+                    }
+                )
             }
             .fullScreenCover(isPresented: $controller.showLoginPage) {
                 UserLoginV()

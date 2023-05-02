@@ -6,13 +6,10 @@ import SwiftUI
 final class ContentViewModel: ObservableObject {
     /// Tracker for showing login page
     @Published var showLoginPage: Bool
-    /// Tracker for being in edit mode
-    @Published var editMode: Bool
     // Handling state change
     private var cancellables: Set<AnyCancellable>
     
     init() {
-        self.editMode = VaultManagerM.shared.userVaults.isEmpty
         self.showLoginPage = true
         VaultManagerM.shared.connectMQTT()
         
