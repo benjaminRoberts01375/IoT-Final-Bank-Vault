@@ -16,6 +16,7 @@
 		070C840C29F8F866003B0D45 /* RequestToSetupVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840B29F8F866003B0D45 /* RequestToSetupVault.swift */; };
 		070C840F29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070C840E29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift */; };
 		078B015E29FA5B6D006380A3 /* ArduinoIsSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B015D29FA5B6D006380A3 /* ArduinoIsSetup.swift */; };
+		079997592A0167C8004417AD /* GenericVaultInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079997582A0167C8004417AD /* GenericVaultInteraction.swift */; };
 		07A5D11B29F5C360006EA009 /* Bank_VaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */; };
 		07A5D11D29F5C360006EA009 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5D11C29F5C360006EA009 /* ContentView.swift */; };
 		07A5D11F29F5C362006EA009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A5D11E29F5C362006EA009 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		070C840B29F8F866003B0D45 /* RequestToSetupVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToSetupVault.swift; sourceTree = "<group>"; };
 		070C840E29F8F8D8003B0D45 /* ArduinoNeedsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoNeedsSetup.swift; sourceTree = "<group>"; };
 		078B015D29FA5B6D006380A3 /* ArduinoIsSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoIsSetup.swift; sourceTree = "<group>"; };
+		079997582A0167C8004417AD /* GenericVaultInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericVaultInteraction.swift; sourceTree = "<group>"; };
 		07A5D11729F5C360006EA009 /* Bank Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank Vault.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A5D11A29F5C360006EA009 /* Bank_VaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_VaultApp.swift; sourceTree = "<group>"; };
 		07A5D11C29F5C360006EA009 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				070C840729F88A45003B0D45 /* CheckUnconfiguredVaults.swift */,
 				070C840B29F8F866003B0D45 /* RequestToSetupVault.swift */,
+				079997582A0167C8004417AD /* GenericVaultInteraction.swift */,
 			);
 			path = "To Arduino Message Types";
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				070C840829F88A45003B0D45 /* CheckUnconfiguredVaults.swift in Sources */,
 				07A5D12D29F5CFB1006EA009 /* UserM.swift in Sources */,
 				070C840229F78B04003B0D45 /* MQTTManagerM.swift in Sources */,
+				079997592A0167C8004417AD /* GenericVaultInteraction.swift in Sources */,
 				07FF24B829FE703D00F35411 /* VaultInfoV.swift in Sources */,
 				07FF24B329FE638C00F35411 /* ArduinoInteracted.swift in Sources */,
 			);
