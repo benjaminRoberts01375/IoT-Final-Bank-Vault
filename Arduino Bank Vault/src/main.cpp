@@ -263,9 +263,4 @@ void loop() {
       trackDoorStatus();
     }
   }
-  // if (millis() / (5000 * loops) >= 1.0) {
-  //   loops += 1;
-  //   Serial.println("Sending...");
-  //   mqttConnection::MQTTClient.publish(TOPIC.c_str(), "Test");
-  // }
 }
