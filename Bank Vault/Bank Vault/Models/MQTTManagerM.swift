@@ -138,4 +138,7 @@ final class MQTTManagerM: ObservableObject {
         sendData(data: GenericVaultInteraction(vault: vault, interaction: "closeVault"), topic: setupTopic)
     }
     
+    public func addDeviceToVault(_ vault: VaultM) {
+        sendData(data: GenericVaultInteraction(vault: vault, interaction: "setup"), topic: setupTopic)
+    }
 }
