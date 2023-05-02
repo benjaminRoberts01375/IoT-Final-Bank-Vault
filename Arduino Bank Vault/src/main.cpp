@@ -5,17 +5,23 @@ struct doorStatusM {
     bool wasOpened;
     unsigned long time;
 };
-
+/// @brief IDs of devices connected to the vault
 string phoneIDs[100] = { };
+/// @brief phoneID being used to setup vault
 string setupPhoneID = "";
+/// @brief Tracks if the vault is allowed to be opened
 bool allowedOpen = false;
+/// @brief Tracks if the vault is actually open
 bool isOpen = false;
-
+/// @brief Handler for ifttt connection
 WiFiClient iftttClient;
-
+/// @brief Constant for the number of door events to track
 const int MAX_DOOR_TRACKER_EVENTS = 200;
+/// @brief Door events
 doorStatusM doorTracker[MAX_DOOR_TRACKER_EVENTS] = { };
+/// Index of the last tracked event
 int trackedEvents = 0;
+
 
 void responseDispatcher(char *topic, uint8_t *payload, unsigned int length);
 
@@ -43,9 +49,9 @@ void sendVaultHistory() {
 
 /// @brief Adds and overwrites the door tracker values
 void trackDoorStatus() {
-  doorTracker[trackedEvents] = { allowedOpen, isOpen, millis() };
-  trackedEvents = (trackedEvents + 1) % MAX_DOOR_TRACKER_EVENTS;
-  sendVaultHistory();
+  doorTracker[trackedEvents] = { allowedOpen, isOpen, millis() }; // At the trackedEvents index, create a new struct to capture the current status
+  trackedEvents = (trackedEvents + 1) % MAX_DOOR_TRACKER_EVENTS;  // Increment the tracked events
+  sendVaultHistory();                                             // Send the vault history now that it has updated
 }
 
 /// @brief Sets up vault based on phone request
@@ -55,25 +61,25 @@ void trackDoorStatus() {
 void configureVault(char *topic, uint8_t *payload, unsigned int length) {
   StaticJsonDocument<200> JSONResponse;
   deserializeJson(JSONResponse, payload);
-  if (mqttConnection::jsonCheck(JSONResponse, setupPhoneID)) {
+  if (mqttConnection::jsonCheck(JSONResponse, setupPhoneID)) {  // If valid JSON...
     Serial.println("Valid JSON");
-    string phoneID = JSONResponse["phoneID"];                                   // Save the phone ID
+    string phoneID = JSONResponse["phoneID"];                     // Save the phone ID
     int index = 0;
-    for (int i = 0; i < sizeof(phoneIDs); i++) {                              // For each index in the phoneIDs array...
-      if (phoneIDs[index] == JSONResponse["phoneID"]) {                         // Check for the existing entry
-        return;                                                                   // Return
+    for (int i = 0; i < sizeof(phoneIDs); i++) {                  // For each index in the phoneIDs array...
+      if (phoneIDs[index] == JSONResponse["phoneID"]) {             // Check for the existing entry
+        return;                                                       // Return
       }
-      else if (phoneIDs[index] != "") {                                         // If there's NOT an empty entry in the phoneIDs...
-        index += 1;                                                               // Keep searching...
+      else if (phoneIDs[index] != "") {                             // If there's NOT an empty entry in the phoneIDs...
+        index += 1;                                                   // Keep searching...
       }
-      else {                                                                    // An empty index was found
-        break;
+      else {                                                        // An empty index was found...
+        break;                                                        // That's where the new phoneID should go
       }
     }
-    phoneIDs[index] = phoneID;                                                // Add the phone ID to the array
+    phoneIDs[index] = phoneID;                                    // Add the phone ID to the array
     Serial.println("Added phone id to list");
-    setupPhoneID = "";                                                        // Reset the stored phoneID
-    mqttConnection::MQTTClient.setCallback(responseDispatcher);               // Reset the callback function
+    setupPhoneID = "";                                            // Reset the stored phoneID
+    mqttConnection::MQTTClient.setCallback(responseDispatcher);   // Reset the callback function
   }
 }
 
@@ -139,17 +145,17 @@ void displaySetupStatus() {
 /// @param payload MQTT response
 /// @param length Length of MQTT response
 void vaultCheckSetup(char *topic, uint8_t *payload, unsigned int length) {
-  StaticJsonDocument<200> JSONResponse;                                                       // JSON document
-  deserializeJson(JSONResponse, payload);
-  if (mqttConnection::jsonCheck(JSONResponse, "", false)) {  
-    if (JSONResponse.containsKey("requestType")) {
-      if (JSONResponse["requestType"] == mqttConnection::checkSetup) {
-        displaySetupStatus();
+  StaticJsonDocument<200> JSONResponse;                                       // JSON document
+  deserializeJson(JSONResponse, payload);                                     // Deserialize payload into JSON
+  if (mqttConnection::jsonCheck(JSONResponse, "", false)) {                   // If it's valid JSON for this vault...
+    if (JSONResponse.containsKey("requestType")) {                              // Check if there's a request type
+      if (JSONResponse["requestType"] == mqttConnection::checkSetup) {            // Check if the request type is "check setup"
+        displaySetupStatus();                                                       // Display the current setup status
       }
-      else if (JSONResponse["requestType"] == mqttConnection::requestSetup && 
-      mqttConnection::jsonCheck(JSONResponse, "") &&
-      JSONResponse.containsKey("phoneID")) {
-        enterSetup(JSONResponse["phoneID"]);
+      else if (JSONResponse["requestType"] == mqttConnection::requestSetup && // Check if the request type is "request setup" and
+      mqttConnection::jsonCheck(JSONResponse, "") &&                          // if the JSON is valid JSON for this vault and
+      JSONResponse.containsKey("phoneID")) {                                  // if there's a phone id
+        enterSetup(JSONResponse["phoneID"]);                                    // Then enter setup
       }
     }
   }
@@ -157,53 +163,50 @@ void vaultCheckSetup(char *topic, uint8_t *payload, unsigned int length) {
 
 /// @brief Basic function to kickoff setup by setting the confirmSetup to be the callback
 void beginVaultSetup() {
-  displaySetupStatus();
-  mqttConnection::MQTTClient.setCallback(vaultCheckSetup);
+  displaySetupStatus();                                     // Announce the vault needs setup
+  mqttConnection::MQTTClient.setCallback(vaultCheckSetup);  // Set the MQTT callback function to vaultCheckSetup
 }
 
+/// @brief A generic handler for MQTT messages after the vault is setup
+/// @param topic MQTT topic
+/// @param payload MQTT message
+/// @param length Length of the MQTT message
 void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
-  Serial.println("Got a response");
-  StaticJsonDocument<200> doc;
-  deserializeJson(doc, payload);
-  if (mqttConnection::jsonCheck(doc, "")) {
+  StaticJsonDocument<200> doc;                        // JSON doc
+  deserializeJson(doc, payload);                      // Deserialize JSON into the document
+  if (mqttConnection::jsonCheck(doc, "")) {           // Check if the JSON is meant for this vault
     bool validPhone = false;
-    for (int i = 0; i < 10; i++) {
-      if (phoneIDs[i] == doc["phoneID"]) {
-        validPhone = true;
-        break;
+    for (int i = 0; i < sizeof(phoneIDs); i++) {      // For each phoneID...
+      if (phoneIDs[i] == doc["phoneID"]) {              // If the delivered phoneID matches a stored phone ID
+        validPhone = true;                                // Track it being a valid phone
+        break;                                            // and exit the loop
       }
     }
-    if (validPhone) {
-      Serial.println("Valid phone");
-      if (doc["interaction"] == "setup") {
-        Serial.println("Enter setup");
-        beginVaultSetup();
+    if (validPhone) {                                 // If it's a valid phone
+      if (doc["interaction"] == "setup") {              // If we're told to enter setup...
+        beginVaultSetup();                                // Enter setup
       }
-      else if (doc["interaction"] == "remove") {
-        Serial.println("Remove");
-        for (int i = 0; i < 100; i++) {
-          if (phoneIDs[i] == doc["phoneID"]) {
-            phoneIDs[i] = "";
-            Serial.println("Removed a phone");
-            break;
+      else if (doc["interaction"] == "remove") {        // If we're told to remove the phoneID...
+        for (int i = 0; i < sizeof(phoneIDs); i++) {      // For each phoneID
+          if (phoneIDs[i] == doc["phoneID"]) {              // If the delivered phoneID matches a given phoneID
+            phoneIDs[i] = "";                                 // Remove that phoneID
+            break;                                            // and exit the loop
           }
         }
       }
-      else if (doc["interaction"] == "openVault") {
-        Serial.println("Open");
-        allowedOpen = true;
-        doorServo.write(180);
-        digitalWrite(LED_R_PIN, LOW);
-        digitalWrite(LED_G_PIN, HIGH);
-        digitalWrite(LED_B_PIN, LOW);
+      else if (doc["interaction"] == "openVault") {   // If we're told to open the vault...
+        allowedOpen = true;                             // Set allowedOpen to true
+        doorServo.write(180);                           // Move the servo into the open position
+        digitalWrite(LED_R_PIN, LOW);                   // Turn off the red LED
+        digitalWrite(LED_G_PIN, HIGH);                  // Turn on the green LED
+        digitalWrite(LED_B_PIN, LOW);                   // Turn off the blue LED
       }
-      else if (doc["interaction"] == "closeVault") {
-        Serial.println("Close");
-        allowedOpen = false;
-        doorServo.write(0);
-        digitalWrite(LED_R_PIN, HIGH);
-        digitalWrite(LED_G_PIN, LOW);
-        digitalWrite(LED_B_PIN, LOW);
+      else if (doc["interaction"] == "closeVault") {  // If we're told to close the vault...
+        allowedOpen = false;                            // Set allowedOpen to false
+        doorServo.write(0);                             // Move the servo into the closed position
+        digitalWrite(LED_R_PIN, HIGH);                  // Turn on the red LED
+        digitalWrite(LED_G_PIN, LOW);                   // Turn off the green LED
+        digitalWrite(LED_B_PIN, LOW);                   // Turn off the blue LED
       }
     }
   }
@@ -232,34 +235,34 @@ void setup() {
 }
 
 void loop() {
-  byte buttonState = digitalRead(DOOR_PIN);
-  mqttConnection::reconnectMQTTClient();
-  mqttConnection::MQTTClient.loop();
+  byte buttonState = digitalRead(DOOR_PIN);           // Read the current status of the vault
+  mqttConnection::reconnectMQTTClient();              // Ensure MQTT connection
+  mqttConnection::MQTTClient.loop();                  // Read MQTT
 
 
-  if (buttonState == HIGH) {
+  if (buttonState == HIGH) {                          // If the vault is actually open
     doorServo.write(0);
-    if (!isOpen) {
-      if (!allowedOpen) {
-        Serial.println("Vault has been broken into");
-        digitalWrite(LED_R_PIN, HIGH);
-        digitalWrite(LED_G_PIN, LOW);
-        digitalWrite(LED_B_PIN, LOW);
-        callWebhook();
+    if (!isOpen) {                                      // If the vault is tracked to be closed
+      if (!allowedOpen) {                               // If the vault is tracked to not be allowed to be open
+        Serial.println("Vault has been broken into");     // Then the vault has been broken into
+        digitalWrite(LED_R_PIN, HIGH);                    // Turn on the red LED
+        digitalWrite(LED_G_PIN, LOW);                     // Turn off the green LED
+        digitalWrite(LED_B_PIN, LOW);                     // Turn off the blue LED
+        callWebhook();                                    // Alert users
       }
-      else if (allowedOpen) {
-        digitalWrite(LED_R_PIN, LOW);
-        digitalWrite(LED_G_PIN, HIGH);
-        digitalWrite(LED_B_PIN, LOW);
+      else {                                            // If the vault is allowed to be open...
+        digitalWrite(LED_R_PIN, LOW);                     // Turn off the red LED
+        digitalWrite(LED_G_PIN, HIGH);                    // Turn on the green LED
+        digitalWrite(LED_B_PIN, LOW);                     // Turn off the blue LED
       }
-      isOpen = true;
-      trackDoorStatus();
+      isOpen = true;                                    // Track the vault being open
+      trackDoorStatus();                                // Track the current status of the vault
     }
   }
-  else {
-    if (isOpen) {
-      isOpen = false;
-      trackDoorStatus();
+  else {                                              // If the vault is actually closed
+    if (isOpen) {                                       // If the vault was tracked to be open
+      isOpen = false;                                     // Track the vault being closed
+      trackDoorStatus();                                  // Track the current status of the vault
     }
   }
 }
