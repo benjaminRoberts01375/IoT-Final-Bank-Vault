@@ -189,6 +189,14 @@ void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
           }
         }
       }
+      else if (doc["interaction"] == "openVault") {
+        Serial.println("Open");
+        allowedOpen = true;
+        doorServo.write(180);
+        digitalWrite(LED_R_PIN, LOW);
+        digitalWrite(LED_G_PIN, HIGH);
+        digitalWrite(LED_B_PIN, LOW);
+      }
     }
   }
 }
