@@ -21,4 +21,20 @@ final class VaultInfoVM: ObservableObject {
         }
         .store(in: &cancellables)
     }
+    
+    internal func removeVault() {
+        VaultManagerM.shared.removeVault(vault)
+    }
+    
+    internal func openDoor() {
+        VaultManagerM.shared.openVault(vault)
+    }
+    
+    internal func closeDoor() {
+        VaultManagerM.shared.closeVault(vault)
+    }
+    
+    internal func addDevice() {
+        VaultManagerM.shared.addDeviceToVault(vault)
+    }
 }
