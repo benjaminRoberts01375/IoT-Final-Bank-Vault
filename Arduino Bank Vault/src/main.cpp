@@ -179,6 +179,16 @@ void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
         Serial.println("Enter setup");
         beginVaultSetup();
       }
+      else if (doc["interaction"] == "remove") {
+        Serial.println("Remove");
+        for (int i = 0; i < 100; i++) {
+          if (phoneIDs[i] == doc["phoneID"]) {
+            phoneIDs[i] = "";
+            Serial.println("Removed a phone");
+            break;
+          }
+        }
+      }
     }
   }
 }
