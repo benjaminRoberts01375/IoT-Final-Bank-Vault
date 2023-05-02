@@ -7,29 +7,29 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            if VaultManagerM.shared.userVaults.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("NO AVAILABLE VAULTS")
-                        .font(.callout)
-                        .fontWeight(.bold)
-                        .foregroundColor(.secondary)
-                }
-            }
-            else {
-                List {
-                    ForEach(Array(VaultManagerM.shared.userVaults.enumerated()), id: \.element.id) { index, vault in
-                        NavigationLink(destination: {
-                            VaultInfoV(vault: vault)
-                        }, label: {
-                            Text(vault.name ?? "Vault - #\(vault.id)")
-                        })
-                        .transition(.opacity)
+            VStack {
+                if VaultManagerM.shared.userVaults.isEmpty {
+                    VStack {
+                        Text("NO AVAILABLE VAULTS")
+                            .font(.callout)
+                            .fontWeight(.bold)
+                            .foregroundColor(.secondary)
                     }
                 }
+                else {
+                    List {
+                        ForEach(Array(VaultManagerM.shared.userVaults.enumerated()), id: \.element.id) { index, vault in
+                            NavigationLink(destination: {
+                                VaultInfoV(vault: vault)
+                            }, label: {
+                                Text(vault.name ?? "Vault - #\(vault.id)")
+                            })
+                            .transition(.opacity)
+                        }
+                    }
+                    .edgesIgnoringSafeArea([.bottom, .horizontal])
+                }
             }
-            Color.clear
-            .edgesIgnoringSafeArea([.bottom, .horizontal])
             .navigationTitle("Your Vaults")
             .toolbar {
                 NavigationLink(                                 // Add vault button
