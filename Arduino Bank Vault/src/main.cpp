@@ -76,6 +76,7 @@ void configureVault(char *topic, uint8_t *payload, unsigned int length) {
   }
 }
 
+/// @brief Call to IFTTT for vault being broken into
 void callWebhook() {
   StaticJsonDocument<200> doc;
   doc["value1"] = "Hello from Arduino land!";
