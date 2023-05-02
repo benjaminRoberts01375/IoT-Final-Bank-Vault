@@ -16,7 +16,6 @@ final class VaultInfoVM: ObservableObject {
                
         VaultManagerM.shared.objectWillChange.sink { _ in
             DispatchQueue.main.async {
-                print("Update")
                 self.objectWillChange.send()
             }
         }
