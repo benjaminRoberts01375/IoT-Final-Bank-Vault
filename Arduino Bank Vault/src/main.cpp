@@ -174,6 +174,11 @@ void responseDispatcher(char *topic, uint8_t *payload, unsigned int length) {
       }
     }
     if (validPhone) {
+      Serial.println("Valid phone");
+      if (doc["interaction"] == "setup") {
+        Serial.println("Enter setup");
+        beginVaultSetup();
+      }
     }
   }
 }
